@@ -20,7 +20,20 @@ section.dark * {
     /*box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);*/
 }
 
+.vcenter {
+	vertical-align: middle;
+}
+
+body {
+	padding-top: 50px;
+}
+
 #team img {
+    width: 180px;
+    height: auto;
+}
+
+#settings img {
     width: 180px;
     height: auto;
 }
