@@ -1,4 +1,3 @@
-
 <?php
 $netid = $_POST["netid"];
 $eventid = $_POST["eventid"];
