@@ -12,11 +12,11 @@ $("#view").validator().on("submit", function (event) {
 function submitForm () {
     console.log("sending");
     var netid = $("#netid").val();
-    $.post("../db/view.php",
+    $.post("../db/view_search.php",
     {
         netid: netid
     },
     function(data, status){
-        alert("Data: " + data + "\nStatus: " + status);
+        $("#resp_table").html(data);
     });
 }
