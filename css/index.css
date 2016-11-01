@@ -1,0 +1,39 @@
+section {
+    background-color: #F8F8F8;
+    padding-top: 20px;
+    padding-bottom: 48px;
+}
+
+section.dark {
+    background-color: #263238;
+}
+
+section.dark * {
+    color: #F8F8F8;
+}
+
+.img-responsive {
+    margin: 0 auto;
+}
+
+.img-circle {
+    /*box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);*/
+}
+
+.vcenter {
+	vertical-align: middle;
+}
+
+body {
+	padding-top: 50px;
+}
+
+#team img {
+    width: 180px;
+    height: auto;
+}
+
+#settings img {
+    width: 180px;
+    height: auto;
+}

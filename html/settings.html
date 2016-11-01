@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Attendance request form</title>
+		<meta charset="utf-8">
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<link rel="stylesheet" type="text/css" href="styles/index.css">
+
+		<!-- JQuery -->
+		<script src="http://code.jquery.com/jquery-3.1.1.min.js"
+	      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+		<!-- Bootstrap Date-Picker Plugin -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css"/>
+
+
+		<meta name="viewport", content="width=device-width, initial-scale=1">
+	</head>
+
+<body>
+<!-- ======= Nav Bar ====== -->
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle " data-toggle="collapse" data-target="#myNav">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../index.html"><span class="glyphicon glyphicon-home"></span></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNav">
+                <ul class="nav navbar-nav">
+                    <li><a href="attn.html">REQUESTS</a></li>
+                    <li><a href="#">CALENDAR</a></li>
+                    <li><a href="#">WARMUP BLOCK</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a class="navbar-brand" href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- ======= Nav Bar ====== -->
+
+<!-- ======= Settings ====== -->
+<section id="settings" class="dark">
+    <div class="container text-center">
+        <h1>Settings</h1>
+        <br />
+        <div class="col-sm-3 ">
+            <a href="#create-student">
+                <img src="images/Tim.jpg" class="img-responsive img-circle" >
+            </a>
+            <h2>Create Student</h2>
+        </div>
+        <div class="col-sm-3 ">
+            <a href="#create-event">
+                <img src="images/Syers.jpg" class="img-responsive img-circle" >
+            </a>
+            <h2>Create Event</h2>
+        </div>
+        <div class="col-sm-3 ">
+            <img src="images/Lucas.jpg" class="img-responsive img-circle" >
+            <h2>Lucas Unruh</h2>
+            <p>Senior, Trombone</p>
+        </div>
+        <div class="col-sm-3 ">
+            <img src="images/Scary.jpg" class="img-responsive img-circle" >
+            <h2>Chris Scaramella</h2>
+            <p>Junior, Trombone</p>
+        </div>
+    </div>
+</section>
+<!-- ======= Settings ====== -->
+
+<!-- ======= Create Student ====== -->
+<section id="create-student">
+    <div class="container text-center">
+        <h1>Create Student</h1>
+    </div>
+    <div class="container text-left">
+        <form>
+          <div class="form-group">
+            <label for="last_name">Last Name:</label>
+            <input type="text" class="form-control" id="last_name" placeholder="e.g. Chang">
+          </div>
+          <div class="form-group">
+            <label for="first_name">First Name:</label>
+            <input type="text" class="form-control" id="first_name" placeholder="e.g. Tim">
+          </div>
+          <div class="form-group">
+            <label for="section">Section:</label>
+            <select class="form-control" id="section">
+                <option>01 - Piccolo</option>
+                <option>02 - Clarinet</option>
+                <option>03 - Saxophone</option>
+                <option>04 - Trumpet</option>
+                <option>05 - Falto</option>
+                <option>06 - Trombone</option>
+                <option>07 - Baritone</option>
+                <option>08 - Bass</option>
+                <option>09 - Drumline</option>
+                <option>10 - Manager</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="netid">netid:</label>
+            <input type="text" class="form-control" id="netid" placeholder="e.g. trees">
+          </div>
+          <div class="form-group">
+            <label for="year">Year:</label>
+            <select class="form-control" id="year">
+                <option>Freshman</option>
+                <option>Sophmore</option>
+                <option>Junior</option>
+                <option>Senior</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="school">School:</label>
+            <select class="form-control" id="school">
+                <option>ND</option>
+                <option>HCC</option>
+                <option>SMC</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</section>
+<!-- ======= Create Student ====== -->
+
+<!-- ======= Create Event ====== -->
+<section id="create-event">
+    <div class="container text-center">
+        <h1>Create Event</h1>
+    </div>
+    <div class="container text-left">
+        <form>
+          <div class="form-group">
+            <label for="event-type">Event Type:</label>
+            <select class="form-control" id="event-type">
+                <option>Practice</option>
+                <option>Game</option>
+            </select>
+          </div>
+          <div class="form-group"> <!-- Date input -->
+            <label class="control-label" for="date">Date:</label>
+            <div class='input-group date datepicker' id='datetimepicker1'>
+                <input class="form-control " id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+                <span class="input-group-addon ">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</section>
+<!-- ======= Create Event ====== -->
+
+<script>
+    $(document).ready(function(){
+      $('.datepicker').datepicker();
+    })
+</script>
+
+</body>
+<html>
+
