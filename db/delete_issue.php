@@ -14,9 +14,9 @@ $sql = "DELTE FROM attendance_issue WHERE attendance_issue.netid = \"$netid\" AN
 $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
 
 if($result){
-	echo "Deletion failed."
+	echo "Deletion failed.";
 } else {
-	echo "Deletion successful."
+	echo "Deletion successful.";
 }
 
 ?>
