@@ -3,13 +3,19 @@
 	<head>
 		<title>Attendance request form</title>
 		<meta charset="utf-8">
-		<script type="text/javascript" src="../scripts/attn.js"></script>
 
+		<!-- JQuery -->
+		<script src="http://code.jquery.com/jquery-3.1.1.min.js"
+	      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js" integrity="sha256-IxYUmOOk74FUrcx5FEMOHVmTJDb7ZAwnC/ivo/OQGxg=" crossorigin="anonymous"></script>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-		<link rel="stylesheet" type="text/css" href="styles/index.css">
+		<link rel="stylesheet" type="text/css" href="../css/index.css">
 
 		<meta name="viewport", content="width=device-width, initial-scale=1">
 	</head>
@@ -59,7 +65,7 @@
 <!-- ======= Form ====== -->
 <section id="form">
     <div class="container text-left">
-        <form id="attn_req">
+        <form role="form" id="attn_req">
           <!-- <div class="form-group">
             <label for="last_name">Last Name:</label>
             <input type="text" class="form-control" id="last_name" placeholder="e.g. Chang">
@@ -77,18 +83,18 @@
             <input type="text" class="form-control" id="netid" placeholder="e.g. trees">
           </div>
           <div class="form-group">
-            <label for="Event">Event:</label>
-            <input type="text" class="form-control" id="Event" placeholder="e.g. 31">
+            <label for="eventid">Event:</label>
+            <input type="text" class="form-control" id="eventid" placeholder="e.g. 31">
           </div>
           <div class="form-group">
-            <label for="sel1">Late/Absent:</label>
+            <label for="absent_type">Late/Absent:</label>
             <select class="form-control" id="absent_type">
                 <option>Late</option>
                 <option>Absent</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="sel1">Excused?:</label>
+            <label for="excused">Excused?:</label>
             <select class="form-control" id="excused">
                 <option>Yes</option>
                 <option>No</option>
@@ -100,5 +106,6 @@
 </section>
 <!-- ======= Form ====== -->
 
+<script type="text/javascript" src="../scripts/attn.js"></script>
 </body>
 </html>
