@@ -9,7 +9,15 @@ $sql = "SELECT * FROM attendance_issues WHERE attendance_issues.netid LIKE \"%$n
 
 $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
 
-echo "<table>\n";
+echo "<table class=\"table table-bordered\">\n";
+echo"    <thead>
+      <tr>
+        <th>netid</th>
+        <th>Event</th>
+        <th>Late/Absent</th>
+	<th>Excused?</th>
+      </tr>
+    </thead>";
 while ($tuple = mysqli_fetch_array($result, MYSQL_ASSOC)) {
     echo "\t<tr>\n";
     foreach ($tuple as $col_value) {
