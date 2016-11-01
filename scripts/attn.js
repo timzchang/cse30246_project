@@ -1,12 +1,4 @@
-
 // submit the attendance form
-//$("#attn_req").submit(function(event){
-//    // cancels the form submission
-//    event.preventDefault();
-//    submitForm();
-//});
-
-
 $("#attn_req").validator().on("submit", function (event) {
     if (event.isDefaultPrevented()) {
         // handle the invalid form...
@@ -23,15 +15,14 @@ function submitForm () {
     var eventid = $("#eventid").val();
     var absent_type = $("#absent_type").val();
     var excused = $("#excused").val();
-    
-    $.ajax({
-        type: "POST",
-        url: "../db/attn_req.php",
-        data: "netid=" + netid + "&eventid=" + eventid + "&absent_type=" + absent_type + "&excused=" + excused,
-        success : function(text){
-            if (text == "success"){
-                console.log("success");
-            }
-        }
+    $.post("../db/attn_req.php",
+    {
+        netid: netid,
+        eventid: eventid,
+	absence_type: absent_type,
+	excused: excused 
+    },
+    function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
     });
 }
