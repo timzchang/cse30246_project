@@ -5,7 +5,7 @@ $link = mysqli_connect('localhost','csyers','trombone') or die('Could not connec
 
 mysqli_select_db($link,'databse') or die('Could not select databse');
 
-$sql = "SELECT * FROM attendance_issue WHERE attendance_issue.netid LIKE $netid;";
+$sql = "SELECT * FROM attendance_issues WHERE attendance_issues.netid LIKE \"%$netid%\";";
 
 $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
 
