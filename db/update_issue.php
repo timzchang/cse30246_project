@@ -21,6 +21,10 @@ if($excused == "select" and $absence_type == "select") {
 
 $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
 
-echo $result;
+if($result){
+	echo "Update failed."
+} else {
+	echo "Update successful."
+}
 
 ?>
