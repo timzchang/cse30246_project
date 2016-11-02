@@ -14,6 +14,8 @@
 		<script src="http://code.jquery.com/jquery-3.1.1.min.js"
 	      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js" integrity="sha256-IxYUmOOk74FUrcx5FEMOHVmTJDb7ZAwnC/ivo/OQGxg=" crossorigin="anonymous"></script>
+
 		<!-- Bootstrap Date-Picker Plugin -->
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css"/>
@@ -176,17 +178,37 @@
 <!-- ======= Create Event ====== -->
 
 <!-- ======= Update Issue  ====== -->
-<section id="update-issue">
+<section id="supdate-issue">
     <div class="container text-center">
         <h1>Update Issue</h1>
     </div>
     <div class="container text-left">
-        <form>
+        <form id="update-issue">
           <div class="form-group">
             <label for="netid-update">netid:</label>
             <input type="text" class="form-control" id="netid-update" placeholder="e.g. trees">
           </div>
-	  <div id="del-update"></div>
+          <div class="form-group">
+            <label for="eventid-update">eventid:</label>
+            <input type="number" class="form-control" id="eventid-update" placeholder="e.g. trees">
+          </div>
+          <div class="form-group">
+            <label for="absent_type-update">Late/Absent:</label>
+            <select class="form-control" id="absent_type-update" >
+		<option>select</option>
+                <option>L</option>
+                <option>A</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="excused-update">Excused?:</label>
+            <select class="form-control" id="excused-update">
+		<option>select</option>
+                <option>Y</option>
+                <option>N</option>
+            </select>
+          </div>
+	  <div id="update-status"></div>
           <button type="submit" class="btn btn-default">Submit</button>
         </form>
     </div>
@@ -194,15 +216,19 @@
 <!-- ======= Update Issue  ====== -->
 
 <!-- ======= Delete Issue  ====== -->
-<section id="del-issue">
+<section id="sdel-issue">
     <div class="container text-center">
         <h1>Delete Issue</h1>
     </div>
     <div class="container text-left">
-        <form>
+        <form id="del-issue">
           <div class="form-group">
             <label for="netid-del">netid:</label>
             <input type="text" class="form-control" id="netid-del" placeholder="e.g. trees">
+          </div>
+          <div class="form-group">
+            <label for="eventid-del">eventid:</label>
+            <input type="number" class="form-control" id="eventid-del" placeholder="e.g. 31">
           </div>
 	  <div id="del-status"></div>
           <button type="submit" class="btn btn-default">Submit</button>
@@ -211,6 +237,7 @@
 </section>
 <!-- ======= Delete Issue  ====== -->
 
+<script src="../scripts/settings.js"></script>
 </body>
 <html>
 

@@ -10,7 +10,6 @@ $("#attn_req").validator().on("submit", function (event) {
     }
 });
 function submitForm () {
-    console.log("sending");
     var netid = $("#netid").val();
     var eventid = $("#eventid").val();
     var absent_type = $("#absent_type").val();
@@ -23,6 +22,6 @@ function submitForm () {
 	excused: excused 
     },
     function(data, status){
-        alert("Data: " + data + "\nStatus: " + status);
+	$("#attn_status").html(data);
     });
 }

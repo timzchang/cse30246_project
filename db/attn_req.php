@@ -11,10 +11,13 @@ mysqli_select_db($link,'databse') or die('Could not select databse');
 $eventid = intval($eventid);
 
 $sql = "INSERT INTO attendance_issues VALUES (\"$netid\",$eventid,\"$absence_type\",\"$excused\");";
-#echo $sql;
 
 $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
 
-echo $result;
+if($result) {
+	echo "Created new attendance issue.";
+} else {
+	echo "Error: attendance issue not created.";
+}
 
 ?>

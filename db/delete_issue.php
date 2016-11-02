@@ -8,14 +8,14 @@ mysqli_select_db($link,'databse') or die('Could not select databse');
 
 $eventid = intval($eventid);
 
-$sql = "DELTE FROM attendance_issue WHERE attendance_issue.netid = \"$netid\" AND attendance_issue.evenid = $eventid;";
+$sql = "DELETE FROM attendance_issues WHERE attendance_issues.netid = \"$netid\" AND attendance_issues.eventid = $eventid;";
 
 $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
 
 if($result){
-	echo "Deletion failed.";
-} else {
 	echo "Deletion successful.";
+} else {
+	echo "Deletion failed.";
 }
 
 ?>

@@ -1,21 +1,50 @@
-$("#view").validator().on("submit", function (event) {
+$("#update-issue").validator().on("submit", function (event) {
     if (event.isDefaultPrevented()) {
         // handle the invalid form...
         console.log("something wrong");
     } else {
         // everything looks good!
         event.preventDefault();
-        submitForm();
+        submitUpdateForm();
     }
 });
-function submitForm () {
-    console.log("sending");
-    var netid = $("#netid").val();
-    $.post("../db/view_search.php",
+function submitUpdateForm () {
+    var netid = $("#netid-update").val();
+    var eventid = $("#eventid-update").val();
+    var absence_type = $("#absent_type-update").val();
+    var excused = $("#excused-update").val();
+    $.post("../db/update_issue.php",
     {
-        netid: netid
+        netid: netid,
+	eventid: eventid,
+	absence_type: absence_type,
+	excused: excused
     },
     function(data, status){
-        $("#resp_table").html(data);
+        $("#update-status").html(data);
+    });
+}
+
+$("#del-issue").validator().on("submit", function (event) {
+    if (event.isDefaultPrevented()) {
+        // handle the invalid form...
+        console.log("something wrong");
+    } else {
+        // everything looks good!
+        event.preventDefault();
+        submitDelForm();
+    }
+});
+function submitDelForm () {
+    console.log("sending");
+    var netid = $("#netid-del").val();
+    var eventid = $("#eventid-del").val();
+    $.post("../db/delete_issue.php",
+    {
+        netid: netid,
+	eventid: eventid
+    },
+    function(data, status){
+        $("#del-status").html(data);
     });
 }
