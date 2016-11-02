@@ -14,9 +14,9 @@ if($excused == "select" and $absence_type == "select") {
 } else if($excused == "select") {
 	$sql = "UPDATE attendance_issues SET attendance_issues.absence_type = '$absence_type' WHERE attendance_issues.netid = \"netid\" AND attendance_issues.evenid = $eventid;";
 } else if($absence_type == "select"){
-	$sql = "UPDATE attendance_issues SET attendace_issues.excused = '$excused' WHERE attendance_issues.netid = \"netid\" AND attendance_issues.eventid = $eventid;";
+	$sql = "UPDATE attendance_issues SET attendance_issues.excused = '$excused' WHERE attendance_issues.netid = \"netid\" AND attendance_issues.eventid = $eventid;";
 } else {
-	$sql = "UPDATE attendance_issues SET attendance_issues.absence_type = '$absence_type', attendace_issues.excused = '$excused' WHERE attendance_issues.netid = \"netid\" AND attendance_issues.evenid = $eventid;";
+	$sql = "UPDATE attendance_issues SET attendance_issues.absence_type = '$absence_type', attendace_issues.excused = '$excused' WHERE attendance_issues.netid = \"netid\" AND attendance_issues.eventid = $eventid;";
 }
 
 $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
