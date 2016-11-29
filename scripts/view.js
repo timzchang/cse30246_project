@@ -18,6 +18,24 @@ function submitForm () {
             netid: netid
         }
     }).done(function(data, status){
+        
+        // echo "<table class=\"table table-bordered\">\n";
+        // echo"    <thead>
+        //       <tr>
+        //         <th>netid</th>
+        //         <th>Event</th>
+        //         <th>Late/Absent</th>
+        //  <th>Excused?</th>
+        //       </tr>
+        //     </thead>";
+        // while ($tuple = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+        //     echo "\t<tr>\n";
+        //     foreach ($tuple as $col_value) {
+        //         echo "\t\t<td>$col_value</td>\n";
+        //     }
+        //     echo "\t</tr>\n";
+        // }
+        // echo "</table>\n";
         $("#resp_table").html(data);
     }).fail(function (err) {
         console.log(err);

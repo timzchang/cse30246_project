@@ -12,23 +12,33 @@ mysqli_select_db($link,'databse') or die('Could not select databse');
 $sql = "SELECT * FROM attendance_issues WHERE attendance_issues.netid LIKE \"%$netid%\";";
 
 $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
+$response = array();
 
-echo "<table class=\"table table-bordered\">\n";
-echo"    <thead>
-      <tr>
-        <th>netid</th>
-        <th>Event</th>
-        <th>Late/Absent</th>
-	<th>Excused?</th>
-      </tr>
-    </thead>";
-while ($tuple = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-    echo "\t<tr>\n";
-    foreach ($tuple as $col_value) {
-        echo "\t\t<td>$col_value</td>\n";
+if ($result && mysqli_num_rows($result) > 0) {
+    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+        $response[] = $row;
     }
-    echo "\t</tr>\n";
 }
-echo "</table>\n";
+
+header('Content-Type: application/json');
+echo json_encode($response);
+
+// echo "<table class=\"table table-bordered\">\n";
+// echo"    <thead>
+//       <tr>
+//         <th>netid</th>
+//         <th>Event</th>
+//         <th>Late/Absent</th>
+// 	<th>Excused?</th>
+//       </tr>
+//     </thead>";
+// while ($tuple = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+//     echo "\t<tr>\n";
+//     foreach ($tuple as $col_value) {
+//         echo "\t\t<td>$col_value</td>\n";
+//     }
+//     echo "\t</tr>\n";
+// }
+// echo "</table>\n";
 
 ?>
