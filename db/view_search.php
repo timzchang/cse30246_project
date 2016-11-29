@@ -1,5 +1,9 @@
 <?php
-$netid = $_POST["netid"];
+$netid = $_GET["netid"];
+
+if (!$netid) {
+    return;
+}
 
 $link = mysqli_connect('localhost','csyers','trombone') or die('Could not connect: ' . mysql_error());
 
