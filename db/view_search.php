@@ -15,7 +15,7 @@ $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
 $response = array();
 
 if ($result && mysqli_num_rows($result) > 0) {
-    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+    while ($row = $result->fetch_array()) {
         $response[] = $row;
     }
 }
