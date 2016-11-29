@@ -1,9 +1,9 @@
 <?php
 $netid = $_GET["netid"];
 
-if (!$netid) {
-    return;
-}
+//if (!$netid) {
+//    return;
+//}
 
 $link = mysqli_connect('localhost','csyers','trombone') or die('Could not connect: ' . mysql_error());
 
@@ -19,6 +19,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         $response[] = $row;
     }
 }
+
 
 header('Content-Type: application/json');
 echo json_encode($response);

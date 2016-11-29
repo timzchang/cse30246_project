@@ -18,6 +18,10 @@ function submitForm () {
             netid: netid
         }
     }).done(function(data, status){
+	//console.log(data)
+	var $table = "";
+
+	$("#resp_table").html($table);
         
         // echo "<table class=\"table table-bordered\">\n";
         // echo"    <thead>
