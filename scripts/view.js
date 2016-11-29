@@ -8,14 +8,20 @@ $("#view").validator().on("submit", function (event) {
         submitForm();
     }
 });
+
 function submitForm () {
     console.log("sending");
     var netid = $("#netid").val();
-    $.post("../db/view_search.php",
-    {
-        netid: netid
-    },
-    function(data, status){
+    $.get({
+        url: "../db/view_search.php",
+        data: {
+            netid: netid
+        }
+    }).done(function(data, status){
         $("#resp_table").html(data);
+    }).fail(function (err) {
+        console.log(err);
+        $('.alert-danger .msg').html('Failed to connect to database!');
+        $('.alert-danger').slideDown();
     });
 }
