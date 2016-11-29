@@ -18,35 +18,33 @@ function submitForm () {
             netid: netid
         }
     }).done(function(attn, status){
-	//console.log(data)
-	var $table = "";
-    $table += "<table class=\"table table-bordered\">\n";
-    $table += "    <thead>
-                <tr>
-                <th>netid</th>
-                <th>Event</th>
-                <th>Late/Absent</th>
-                <th>Excused?</th>
-                </tr>
-                </thead>";
+	if (!Array.isArray(attn)) {
+		console.log("not array");
+	}
+	var $table = $("table tbody").html('');
+    //$table += "<table class=\"table table-bordered\">\n";
+    //$table += "    <thead> <tr> <th>netid</th> <th>Event</th> <th>Late/Absent</th> <th>Excused?</th> </tr> </thead>";
 
-    $("#resp_table").html($table);
     for (var i = 0; i < attn.length; i++) {
+	var excused = (attn[i].excused == 'Y') ? "Yes" : "No";
+	var absence_type = (attn[i].absence_type == 'A') ? "Absent" : "Late";
         $row = $('<tr id="row-' + i + '">'+
             '<td>' + attn[i].netid + '</td>' +
             '<td>' + attn[i].eventid + '</td>' +
-            '<td>' + attn[i].absent_type + '</td>' +
-            '<td>' + attn[i].netid + '</td>' +
-            '<td>' + attn[i].excused + '</td>'+
+            '<td>' + absence_type + '</td>' +
+            '<td>' + excused + '</td>'+
             '<td><a class="edit-issue" href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>' +
             '<a class="remove-issue" href="#"><span class="glyphicon glyphicon-trash"></span></td><tr>'
             );
 
         $row.find('.edit-issue').data(attn[i]);
         $row.find('.remove-issue').data(attn[i]);
+	//console.log($row);
 
-        $("#resp_table").html($row);
+        //$("#resp_table").html($row);
+	$table.append($row);
     };
+    //$("#resp_table").html($table);
 
 	
         
