@@ -9,6 +9,10 @@ $("#view").validator().on("submit", function (event) {
     }
 });
 
+$("#closebtn").on('click', function (event) {
+    $('.alert-danger').slideUp();
+})
+
 function submitForm () {
     console.log("sending");
     var netid = $("#netid").val();
