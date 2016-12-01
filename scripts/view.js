@@ -52,6 +52,15 @@ function submitForm () {
 
             $row.find('.edit').data(attn[i]);
             $row.find('.remove').data(attn[i]);
+
+            // add click handler for edit
+            $row.find('.edit').on('click', function (event) {
+                var $target = $(event.delegateTarget);
+                var mem = $target.data();
+
+                $("#netid").val(mem.netid);
+            })
+
        	    $table.append($row);
         };
     }).fail(function (err) {
