@@ -46,13 +46,13 @@ function submitForm () {
                 '<td>' + attn[i].type + '</td>' +
                 '<td>' + absence_type + '</td>' +
                 '<td>' + excused + '</td>'+
-                '<td><a class="edit-issue" href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>' +
-                '<a class="remove-issue" href="#"><span class="glyphicon glyphicon-trash"></span></td><tr>'
+                '<td><a class="edit" data-toggle="modal" data-target="#edit-issue-modal" href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>' +
+                '<a class="remove" data-toggle="modal" data-target="#edit-issue-modal" href="#"><span class="glyphicon glyphicon-trash"></span></td><tr>'
                 );
 
-            $row.find('.edit-issue').data(attn[i]);
-            $row.find('.remove-issue').data(attn[i]);
-        	$table.append($row);
+            $row.find('.edit').data(attn[i]);
+            $row.find('.remove').data(attn[i]);
+       	    $table.append($row);
         };
     }).fail(function (err) {
         console.log(err);
