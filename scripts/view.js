@@ -14,7 +14,6 @@ $("#closebtn").on('click', function (event) {
 })
 
 function submitForm () {
-    console.log("sending");
     var netid = $("#netid").val();
     $.get({
         url: "../db/view_search.php",
@@ -40,10 +39,10 @@ function submitForm () {
         for (var i = 0; i < attn.length; i++) {
     	    var excused = (attn[i].excused == 'Y') ? "Yes" : "No";
     	    var absence_type = (attn[i].absence_type == 'A') ? "Absent" : "Late";
-            var date = attn[i].start.split(" ")[0];
+            var date = attn[i].date;
             $row = $('<tr id="row-' + i + '">'+
                 '<td>' + attn[i].netid + '</td>' +
-                '<td>' + date + '</td>' +
+                '<td>' + attn[i].date + '</td>' +
                 '<td>' + attn[i].type + '</td>' +
                 '<td>' + absence_type + '</td>' +
                 '<td>' + excused + '</td>'+
