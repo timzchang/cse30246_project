@@ -2,7 +2,6 @@
 $netid = $_GET["netid"];
 
 if (!$netid) {
-    echo "none";
     return;
 }
 
