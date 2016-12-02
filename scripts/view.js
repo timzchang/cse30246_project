@@ -75,7 +75,7 @@ function submitForm () {
             });
 
             // add click handler for delete
-            $row.find('.edit').on('click', function (event) {
+            $row.find('.remove').on('click', function (event) {
                 var $target = $(event.delegateTarget);
                 var mem = $target.data();
                 $('#del-issue-modal').data(mem);
@@ -114,6 +114,7 @@ $(function () {
                 absence_type: absence_type,
                 excused: excused
             }).done(function(resp) {
+                console.log('update success');
                 submitForm();
             }).fail(function(err) {
                 console.log(err);
@@ -131,10 +132,13 @@ $(function () {
             var mem = $('#del-issue-modal').data();
             if (!mem || !mem.hasOwnProperty('netid') || !mem.hasOwnProperty('date')) {
                 console.log('invalid delete');
+		console.log(mem.netid);
+		console.log(mem.date);
+
                 return;
             }
 
-            $.post('api/update_member.php', {
+            $.post('../db/delete_issue.php', {
                 netid: mem.netid,
                 date: mem.date
             }).done(function(resp) {
