@@ -16,9 +16,9 @@ function submitUpdateForm () {
     $.post("../db/update_issue.php",
     {
         netid: netid,
-	eventid: eventid,
-	absence_type: absence_type,
-	excused: excused
+	    eventid: eventid,
+	    absence_type: absence_type,
+	    excused: excused
     },
     function(data, status){
         $("#update-status").html(data);
@@ -36,13 +36,12 @@ $("#del-issue").validator().on("submit", function (event) {
     }
 });
 function submitDelForm () {
-    console.log("sending");
     var netid = $("#netid-del").val();
     var eventid = $("#eventid-del").val();
     $.post("../db/delete_issue.php",
     {
         netid: netid,
-	eventid: eventid
+	    eventid: eventid
     },
     function(data, status){
         $("#del-status").html(data);

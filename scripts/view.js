@@ -29,7 +29,7 @@ function submitForm () {
                 return;
             };
     		console.log("not array");
-		console.log(attn);
+		    console.log(attn);
             return;
     	}
         $('.alert-danger').slideUp();
@@ -59,7 +59,7 @@ function submitForm () {
                 var $target = $(event.delegateTarget);
                 var mem = $target.data();
                 var date = mem.date.split("-");
-		var new_date = date[1] + "/" + date[2] + "/" + date[0];
+                var new_date = date[1] + "/" + date[2] + "/" + date[0];
 
                 $('#form-netid').val(mem.netid);
                 $('#form-date').val(new_date);
@@ -72,7 +72,14 @@ function submitForm () {
                 (mem.excused == 'Y') ?
                 $('input[name=excused][value=yes]').prop('checked', true) :
                 $('input[name=excused][value=no]').prop('checked', true) ;
-            })
+            });
+
+            // add click handler for delete
+            $row.find('.edit').on('click', function (event) {
+                var $target = $(event.delegateTarget);
+                var mem = $target.data();
+                $('#del-issue-modal').data(mem);
+            });
 
        	    $table.append($row);
         };
@@ -82,3 +89,59 @@ function submitForm () {
         $('.alert-danger').slideDown();
     });
 }
+
+$(function () {
+    $('#edit-issue-submit').on('click', function(event) {
+        $('#edit-issue-form').submit();
+    });
+    $('#edit-issue-form').on('submit', function(event) {
+        if (event.isDefaultPrevented()) {
+            // handle the invalid form...
+            console.log("default event not prevented");
+        } else {
+            // everything looks good!
+            event.preventDefault();
+            var netid = $("#form-netid").val();
+            var date = $("#form-date").val();
+            var event_type = $('#event-type option:selected').val();
+            var absence_type = ($("#input[name=type]:checked").val() == "Absent") ? 'A' : 'L';
+            var excused = ($("#input[name=excused]:checked").val() == "Yes") ? 'Y' : 'N';
+            $.post("../db/update_issue.php",
+            {
+                netid: netid,
+                date: date,
+                event_type: event_type,
+                absence_type: absence_type,
+                excused: excused
+            }).done(function(resp) {
+                submitForm();
+            }).fail(function(err) {
+                console.log(err);
+            });
+        }
+    });
+    $('#del-issue-submit').on('click', function (event) {
+        if (event.isDefaultPrevented()) {
+            // handle the invalid form...
+            console.log("default event not prevented");
+        } else {
+            // everything looks good!
+            event.preventDefault();
+
+            var mem = $('#del-issue-modal').data();
+            if (!mem || !mem.hasOwnProperty('netid') || !mem.hasOwnProperty('date')) {
+                console.log('invalid delete');
+                return;
+            }
+
+            $.post('api/update_member.php', {
+                netid: mem.netid,
+                date: mem.date
+            }).done(function(resp) {
+                console.log('delete success');
+            }).fail(function(resp) {
+                console.log(resp);
+            });
+        }
+    })
+});
