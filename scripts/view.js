@@ -12,6 +12,14 @@ $("#view").validator().on("submit", function (event) {
 $("#closebtn").on('click', function (event) {
     $('.alert-danger').slideUp();
 })
+$("#success-closebtn").on('click', function (event) {
+    $('.alert-success').slideUp();
+})
+
+function formatDate(date) {
+    var new_date = date.split("-");
+    return new_date[1] + "/" + new_date[2] + "/" + new_date[0];
+}
 
 function submitForm () {
     var netid = $("#netid").val();
@@ -26,24 +34,31 @@ function submitForm () {
                 console.log("invalid netid");
                 $('.alert-danger .msg').html('Invalid netid!');
                 $('.alert-danger').slideDown();
+                $('.alert-success').slideUp();
                 return;
             };
-    		console.log("not array");
-		    console.log(attn);
+            if (attn == "empty") {
+                console.log("no absences");
+                $('.alert-success .msg').html('No Absences!');
+                $('.alert-success').slideDown();
+                $('.alert-danger').slideUp();
+                return;
+            };
+            console.log("not array");
+            console.log(attn);
             return;
     	}
         $('.alert-danger').slideUp();
+        $('.alert-success').slideUp();
 
     	var $table = $("table tbody").html('');
 
         for (var i = 0; i < attn.length; i++) {
     	    var excused = (attn[i].excused == 'Y') ? "Yes" : "No";
     	    var absence_type = (attn[i].absence_type == 'A') ? "Absent" : "Late";
-            var date = attn[i].date.split("-");
-            var new_date = date[1] + "/" + date[2] + "/" + date[0];
             $row = $('<tr id="row-' + i + '">'+
                 '<td>' + attn[i].netid + '</td>' +
-                '<td>' + new_date + '</td>' +
+                '<td>' + formatDate(attn[i].date) + '</td>' +
                 '<td>' + attn[i].type + '</td>' +
                 '<td>' + absence_type + '</td>' +
                 '<td>' + excused + '</td>'+
@@ -58,11 +73,9 @@ function submitForm () {
             $row.find('.edit').on('click', function (event) {
                 var $target = $(event.delegateTarget);
                 var mem = $target.data();
-                var date = mem.date.split("-");
-                var new_date = date[1] + "/" + date[2] + "/" + date[0];
 
                 $('#form-netid').val(mem.netid);
-                $('#form-date').val(new_date);
+                $('#form-date').val(formatDate(mem.date));
                 $('#event-type').val(mem.type);
 
                 (mem.absence_type == 'A') ?
@@ -102,7 +115,8 @@ $(function () {
             // everything looks good!
             event.preventDefault();
             var netid = $("#form-netid").val();
-            var date = $("#form-date").val();
+            var old_date = $("#form-date").val().split("/");
+            var date = old_date[2] + "-" + old_date[0] + "-" + old_date[1];
             var event_type = $('#event-type option:selected').val();
             var absence_type = ($("#input[name=type]:checked").val() == "Absent") ? 'A' : 'L';
             var excused = ($("#input[name=excused]:checked").val() == "Yes") ? 'Y' : 'N';
@@ -115,6 +129,7 @@ $(function () {
                 excused: excused
             }).done(function(resp) {
                 console.log('update success');
+                console.log(resp);
                 submitForm();
             }).fail(function(err) {
                 console.log(err);
@@ -134,7 +149,6 @@ $(function () {
                 console.log('invalid delete');
 		console.log(mem.netid);
 		console.log(mem.date);
-
                 return;
             }
 
@@ -143,6 +157,7 @@ $(function () {
                 date: mem.date
             }).done(function(resp) {
                 console.log('delete success');
+                console.log(resp);
             }).fail(function(resp) {
                 console.log(resp);
             });

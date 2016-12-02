@@ -22,6 +22,11 @@ $sql = "SELECT * FROM attendance_issues a, events e WHERE a.eventid=e.eventid an
 $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
 $response = array();
 
+if ($result && mysqli_num_rows($result) == 0) {
+    echo "empty";
+    return;
+}
+
 if ($result && mysqli_num_rows($result) > 0) {
     while ($row = $result->fetch_array()) {
         $response[] = $row;
