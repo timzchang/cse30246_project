@@ -39,10 +39,11 @@ function submitForm () {
         for (var i = 0; i < attn.length; i++) {
     	    var excused = (attn[i].excused == 'Y') ? "Yes" : "No";
     	    var absence_type = (attn[i].absence_type == 'A') ? "Absent" : "Late";
-            var date = attn[i].date;
+            var date = attn[i].date.split("-");
+            var new_date = date[1] + "/" + date[2] + "/" + date[0];
             $row = $('<tr id="row-' + i + '">'+
                 '<td>' + attn[i].netid + '</td>' +
-                '<td>' + attn[i].date + '</td>' +
+                '<td>' + new_date + '</td>' +
                 '<td>' + attn[i].type + '</td>' +
                 '<td>' + absence_type + '</td>' +
                 '<td>' + excused + '</td>'+
@@ -57,8 +58,20 @@ function submitForm () {
             $row.find('.edit').on('click', function (event) {
                 var $target = $(event.delegateTarget);
                 var mem = $target.data();
+                var date = mem.date.split("-");
+		var new_date = date[1] + "/" + date[2] + "/" + date[0];
 
-                $("#netid").val(mem.netid);
+                $('#form-netid').val(mem.netid);
+                $('#form-date').val(new_date);
+                $('#event-type').val(mem.type);
+
+                (mem.absence_type == 'A') ?
+                $('input[name=type][value=absent]').prop('checked', true) :
+                $('input[name=type][value=late]').prop('checked', true) ;
+
+                (mem.excused == 'Y') ?
+                $('input[name=excused][value=yes]').prop('checked', true) :
+                $('input[name=excused][value=no]').prop('checked', true) ;
             })
 
        	    $table.append($row);
