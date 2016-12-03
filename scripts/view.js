@@ -29,27 +29,29 @@ function submitForm () {
             netid: netid
         }
     }).done(function(attn, status){
+            if (!Array.isArray(attn) && attn == "empty") {
+                console.log("no absences");
+                $('.alert-success .msg').html('No Absences!');
+                $('.alert-success').slideDown();
+                $('.alert-danger').slideUp();
+            attn = [];
+            } else
     	if (!Array.isArray(attn)) {
             if (attn == "none") {
                 console.log("invalid netid");
                 $('.alert-danger .msg').html('Invalid netid!');
                 $('.alert-danger').slideDown();
                 $('.alert-success').slideUp();
-                return;
-            };
-            if (attn == "empty") {
-                console.log("no absences");
-                $('.alert-success .msg').html('No Absences!');
-                $('.alert-success').slideDown();
-                $('.alert-danger').slideUp();
-                return;
+                attn = [];
             };
             console.log("not array");
             console.log(attn);
             return;
     	}
         $('.alert-danger').slideUp();
-        $('.alert-success').slideUp();
+        if (attn.length != 0) {
+            $('.alert-success').slideUp();
+        }
 
     	var $table = $("table tbody").html('');
 
@@ -118,9 +120,13 @@ $(function () {
             var old_date = $("#form-date").val().split("/");
             var date = old_date[2] + "-" + old_date[0] + "-" + old_date[1];
             var event_type = $('#event-type option:selected').val();
-            var absence_type = ($("#input[name=type]:checked").val() == "Absent") ? 'A' : 'L';
-            var excused = ($("#input[name=excused]:checked").val() == "Yes") ? 'Y' : 'N';
-	console.log($("#input[name=excused]:checked").val());
+            var absence_type = ($("input[name=type]:checked").val() == "absent") ? 'A' : 'L';
+            var excused = ($("input[name=excused]:checked").val() == "yes") ? 'Y' : 'N';
+
+            if(!netid || !$("#form-date").val()) {
+                return;
+            }
+
             $.post("../db/update_issue.php",
             {
                 netid: netid,
