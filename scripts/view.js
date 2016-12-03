@@ -120,6 +120,7 @@ $(function () {
             var event_type = $('#event-type option:selected').val();
             var absence_type = ($("#input[name=type]:checked").val() == "Absent") ? 'A' : 'L';
             var excused = ($("#input[name=excused]:checked").val() == "Yes") ? 'Y' : 'N';
+	console.log($("#input[name=excused]:checked").val());
             $.post("../db/update_issue.php",
             {
                 netid: netid,
