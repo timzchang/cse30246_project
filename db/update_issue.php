@@ -11,7 +11,7 @@ mysqli_select_db($link,'databse') or die('Could not select databse');
 
 $eventid = intval($eventid);
 
-$sql = "SELECT eventid FROM events WHERE date = $date"
+$sql = "SELECT eventid FROM events WHERE date = $date";
 
 $result = mysqli_query($link,$sql) or die('Query failed" ' . mysql_error());
 
