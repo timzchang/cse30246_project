@@ -7,7 +7,66 @@ $link = mysqli_connect('localhost','csyers','trombone') or die('Could not connec
 mysqli_select_db($link,'databse') or die('Could not select databse');
 
 # get the event idea from the events table
-$sql = "SELECT A.section, A.excused_late, B.unexcused_late, C.excused_absent, D.unexcused_absent, (A.excused_late+B.unexcused_late+C.excused_absent+D.unexcused_absent) as total FROM (SELECT section, COUNT(*) AS excused_late FROM attendance_issues, students WHERE students.netid = attendance_issues.netid AND attendance_issues.excused = 'Y' AND attendance_issues.absence_type = 'L' GROUP BY section) A, (SELECT section, COUNT(*) AS unexcused_late FROM attendance_issues, students WHERE students.netid = attendance_issues.netid AND attendance_issues.excused = 'N' AND attendance_issues.absence_type = 'L' GROUP BY section) B, (SELECT section, COUNT(*) AS excused_absent FROM attendance_issues, students WHERE students.netid = attendance_issues.netid AND attendance_issues.excused = 'Y' AND attendance_issues.absence_type = 'A' GROUP BY section) C, (SELECT section, COUNT(*) AS unexcused_absent FROM attendance_issues, students WHERE students.netid = attendance_issues.netid AND attendance_issues.excused = 'N' AND attendance_issues.absence_type = 'A' GROUP BY section) D WHERE A.section = B.section AND B.section = C.section AND C.section = D.section ORDER BY total;"
+
+$sql = "SELECT H.section, 
+       Ifnull(excused_late, 0)     AS excused_late, 
+       Ifnull(unexcused_late, 0)   AS unexcused_late, 
+       Ifnull(excused_absent, 0)   AS excused_absent, 
+       Ifnull(unexcused_absent, 0) AS unexcused_absent 
+FROM   (SELECT G.section, 
+               excused_late, 
+               unexcused_late, 
+               excused_absent 
+        FROM   (SELECT D.section, 
+                       excused_late, 
+                       unexcused_late 
+                FROM   (SELECT A.section, 
+                               B.excused_late 
+                        FROM   (SELECT section 
+                                FROM   students 
+                                GROUP  BY section) A 
+                               LEFT JOIN (SELECT section, 
+                                                 Count(*) AS excused_late 
+                                          FROM   attendance_issues, 
+                                                 students 
+                                          WHERE  students.netid = 
+                                                 attendance_issues.netid 
+                                                 AND attendance_issues.excused = 
+                                                     'Y' 
+                                                 AND 
+                                         attendance_issues.absence_type = 
+                                         'L' 
+                                          GROUP  BY section) B 
+                                      ON A.section = B.section) C 
+                       LEFT JOIN (SELECT section, 
+                                         Count(*) AS unexcused_late 
+                                  FROM   attendance_issues, 
+                                         students 
+                                  WHERE  students.netid = 
+                                         attendance_issues.netid 
+                                         AND attendance_issues.excused = 'N' 
+                                         AND attendance_issues.absence_type = 
+                                             'L' 
+                                  GROUP  BY section) D 
+                              ON C.section = D.section) F 
+               LEFT JOIN (SELECT section, 
+                                 Count(*) AS excused_absent 
+                          FROM   attendance_issues, 
+                                 students 
+                          WHERE  students.netid = attendance_issues.netid 
+                                 AND attendance_issues.excused = 'Y' 
+                                 AND attendance_issues.absence_type = 'A' 
+                          GROUP  BY section) G 
+                      ON F.section = G.section) H 
+       LEFT JOIN (SELECT section, 
+                         Count(*) AS unexcused_absent 
+                  FROM   attendance_issues, 
+                         students 
+                  WHERE  students.netid = attendance_issues.netid 
+                         AND attendance_issues.excused = 'N' 
+                         AND attendance_issues.absence_type = 'A' 
+                  GROUP  BY section) I 
+              ON H.section = I.section;"
 
 # get the result of the query
 $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
