@@ -4,6 +4,7 @@
 		<title>Attendance request form</title>
 		<meta charset="utf-8">
 
+
 		<!-- JQuery -->
 		<script src="http://code.jquery.com/jquery-3.1.1.min.js"
 	      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
@@ -11,6 +12,11 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
     		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js" integrity="sha256-IxYUmOOk74FUrcx5FEMOHVmTJDb7ZAwnC/ivo/OQGxg=" crossorigin="anonymous"></script>
+
+		<!-- Bootstrap Date-Picker Plugin -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css"/>
+
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -81,30 +87,40 @@
           </div> -->
           <div class="form-group">
             <label for="netid">netid:</label>
-            <input type="text" class="form-control" id="netid" placeholder="e.g. trees">
+            <input type="text" class="form-control" id="netid" placeholder="e.g. trees" required>
           </div>
           <div class="form-group">
             <label for="eventid">Event:</label>
-            <input type="number" class="form-control" id="eventid" placeholder="e.g. 31">
+                            <div class='input-group date datepicker' id='datetimepicker1'>
+                                <input class="form-control " id="form-date" name="form-date" placeholder="MM/DD/YYY" type="text" required>
+                                <span class="input-group-addon ">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
           </div>
           <div class="form-group">
             <label for="absent_type">Late/Absent:</label>
             <select class="form-control" id="absent_type">
-                <option>L</option>
-                <option>A</option>
+                <option>Late</option>
+                <option>Absent</option>
             </select>
           </div>
           <div class="form-group">
             <label for="excused">Excused?:</label>
             <select class="form-control" id="excused">
-                <option>Y</option>
-                <option>N</option>
+                <option>Yes</option>
+                <option>No</option>
             </select>
           </div>
 	  <div id="attn_status"></div>
           <button type="submit" class="btn btn-default">Submit</button>
         </form>
     </div>
+<script>
+    $(document).ready(function(){
+      $('.datepicker').datepicker();
+    })
+</script>
 </section>
 <!-- ======= Form ====== -->
 

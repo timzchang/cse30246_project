@@ -9,16 +9,24 @@ $("#attn_req").validator().on("submit", function (event) {
         submitForm();
     }
 });
+
+function formatDate(date) {
+    var new_date = date.split("-");
+    return new_date[1] + "/" + new_date[2] + "/" + new_date[0];
+}
+
 function submitForm () {
     var netid = $("#netid").val();
-    var eventid = $("#eventid").val();
-    var absent_type = $("#absent_type").val();
+    var date = $("#date").val()
+    date = formatDate(date);
     var excused = $("#excused").val();
+    var absence_type = ($("#absent_type").val() == "absent") ? 'A' : 'L';
+    var excused = ($("#excused").val() == "yes") ? 'Y' : 'N';
     $.post("../db/attn_req.php",
     {
         netid: netid,
-        eventid: eventid,
-	absence_type: absent_type,
+        date: date,
+	absence_type: absence_type,
 	excused: excused 
     },
     function(data, status){
