@@ -1,7 +1,7 @@
 <?php
 # get information from POST command
 $netid = $_POST["netid"];
-$eventid = $_POST["eventid"];
+$date = $_POST["date"];
 
 # connect to dsg
 $link = mysqli_connect('localhost','csyers','trombone') or die('Could not connect: ' . mysql_error());
@@ -9,20 +9,35 @@ $link = mysqli_connect('localhost','csyers','trombone') or die('Could not connec
 # connect to databse
 mysqli_select_db($link,'databse') or die('Could not select databse');
 
-# convert eventid to an integer
-$eventid = intval($eventid);
+# get the event idea from the events table
+$sql = "SELECT eventid FROM events WHERE date = '$date'";
 
-# SQL query to delete the attendance issue
-$sql = "DELETE FROM attendance_issues WHERE attendance_issues.netid = \"$netid\" AND attendance_issues.eventid = $eventid;";
+# run the SQL command
+$result = mysqli_query($link,$sql) or die('Query failed" ' . mysql_error());
 
-# run the query and get the result
-$result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
+# if there was an event that mathed the information
+if($result->num_rows != 0){
+    # get the first row
+    $row = $result->fetch_row();
+    $eventid = $row[0];
 
-# if success, tell the front end
-if($result){
+    # SQL query to delete the attendance issue
+    $sql = "DELETE FROM attendance_issues WHERE attendance_issues.netid = \"$netid\" AND attendance_issues.eventid = $eventid;";
+
+    # run the query and get the result
+    $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
+
+    # if success, tell the front end
+    if($result){
 	echo "Deletion successful.";
-} else {
+    } else {
 	echo "Deletion failed.";
+    }   
+} else {
+    # if there was no event on that date, return that information to the user
+    $date = date_create_from_format('Y-m-d',$date);
+    $date = $date->format('l, F d, Y');
+    echo "There is no event on $date.";
 }
 
 ?>
