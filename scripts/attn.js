@@ -11,13 +11,13 @@ $("#attn_req").validator().on("submit", function (event) {
 });
 
 function formatDate(date) {
-    var new_date = date.split("-");
-    return new_date[1] + "/" + new_date[2] + "/" + new_date[0];
+    var new_date = date.split("/");
+    return new_date[2] + "-" + new_date[0] + "-" + new_date[1];
 }
 
 function submitForm () {
     var netid = $("#netid").val();
-    var date = $("#date").val()
+    var date = $("#form-date").val()
     date = formatDate(date);
     var excused = $("#excused").val();
     var absence_type = ($("#absent_type").val() == "absent") ? 'A' : 'L';

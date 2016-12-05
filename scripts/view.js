@@ -116,6 +116,7 @@ $(function () {
         } else {
             // everything looks good!
             event.preventDefault();
+            var r = 0;
             var netid = $("#form-netid").val();
             var old_date = $("#form-date").val().split("/");
             var date = old_date[2] + "-" + old_date[0] + "-" + old_date[1];
@@ -137,10 +138,15 @@ $(function () {
             }).done(function(resp) {
                 console.log('update success');
                 console.log(resp);
+                $('#edit-issue-modal').modal('hide');
+                r = 1;
                 submitForm();
             }).fail(function(err) {
                 console.log(err);
             });
+            if (r==1) {
+                $('#edit-issue-modal').modal('hide');
+            }
         }
     });
     $('#del-issue-submit').on('click', function (event) {
