@@ -138,7 +138,6 @@ $(function () {
             }).done(function(resp) {
                 console.log('update success');
                 console.log(resp);
-                $('#edit-issue-modal').modal('hide');
                 r = 1;
                 submitForm();
             }).fail(function(err) {
@@ -169,7 +168,7 @@ $(function () {
                 netid: mem.netid,
                 date: mem.date
             }).done(function(resp) {
-                console.log('delete success');
+                submitForm();
                 console.log(resp);
             }).fail(function(resp) {
                 console.log(resp);
