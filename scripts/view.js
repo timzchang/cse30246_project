@@ -159,8 +159,8 @@ $(function () {
             var mem = $('#del-issue-modal').data();
             if (!mem || !mem.hasOwnProperty('netid') || !mem.hasOwnProperty('date')) {
                 console.log('invalid delete');
-		console.log(mem.netid);
-		console.log(mem.date);
+		        console.log(mem.netid);
+		        console.log(mem.date);
                 return;
             }
 
