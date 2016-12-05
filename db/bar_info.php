@@ -12,7 +12,8 @@ $sql = "SELECT H.section,
        Ifnull(excused_late, 0)     AS excused_late, 
        Ifnull(unexcused_late, 0)   AS unexcused_late, 
        Ifnull(excused_absent, 0)   AS excused_absent, 
-       Ifnull(unexcused_absent, 0) AS unexcused_absent 
+       Ifnull(unexcused_absent, 0) AS unexcused_absent,
+       (Ifnull(excused_late, 0) + Ifnull(unexcused_late, 0) + Ifnull(excused_absent, 0) + Ifnull(unexcused_absent, 0)) AS total
 FROM   (SELECT G.section, 
                excused_late, 
                unexcused_late, 
@@ -66,7 +67,7 @@ FROM   (SELECT G.section,
                          AND attendance_issues.excused = 'N' 
                          AND attendance_issues.absence_type = 'A' 
                   GROUP  BY section) I 
-              ON H.section = I.section;"
+              ON H.section = I.section ORDER BY total;"
 
 # get the result of the query
 $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
