@@ -26,9 +26,9 @@ function searchDate (date) {
     	    var excused = (attn[i].excused == 'Y') ? "Yes" : "No";
     	    var absence_type = (attn[i].absence_type == 'A') ? "Absent" : "Late";
             $row = $('<tr id="row-' + i + '">'+
+		'<td>' + attn[i].lname + '</td>' +
+		'<td>' + attn[i].fname + '</td>' +
                 '<td>' + attn[i].netid + '</td>' +
-                '<td>' + formatDate(attn[i].date) + '</td>' +
-                '<td>' + attn[i].type + '</td>' +
                 '<td>' + absence_type + '</td>' +
                 '<td>' + excused + '</td>'+
                 '<td><a class="edit" data-toggle="modal" data-target="#edit-issue-modal" href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>' +
