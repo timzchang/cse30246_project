@@ -83,75 +83,63 @@
 <!-- ======= Header ====== -->
 
 
-<!-- ======= Graph 1 Form ====== -->
-<section id="graph-1-form">
-<div class="container-fluid text-left"> <h2>Attendance Over Time</h2></div>
-    <div class="col-xs-12 text-left">
-        <form class="form-inline"role="form" id="attn_req">
-            <div>
-            <label class="control-label">Sections: </label>
-            <!-- <div class="checkbox-inline spaced"> -->
+<!-- ======= Overall Form ====== -->
+<section >
+
+<div class="col-xs-12 text-left">
+    <form class="form-inline"role="form" id="graph-form">
+        <div>
+        <label class="control-label">Sections: </label>
+            <div id="all-sections" class="col-xs-12">
+                <label class="checkbox-inline"><input type="checkbox"> All</label>
+            </div>
+            <div id="sections" class="col-xs-12">
                 <label class="checkbox-inline"><input type="checkbox"> Piccolo</label>
-            <!-- </div> -->
-            <!-- <div class="checkbox-inline spaced"> -->
                 <label class="checkbox-inline"><input type="checkbox"> Clarinet</label>
-            <!-- </div> -->
-            <!-- <div class="checkbox-inline spaced"> -->
                 <label class="checkbox-inline"><input type="checkbox"> Saxaphone</label>
-            <!-- </div> -->
-            <!-- <div class="checkbox-inline spaced"> -->
                 <label class="checkbox-inline"><input type="checkbox"> Trumpet</label>
-            <!-- </div> -->
-            <!-- <div class="checkbox-inline spaced"> -->
                 <label class="checkbox-inline"><input type="checkbox"> Falto</label>
-            <!-- </div> -->
-            <!-- <div class="checkbox-inline spaced"> -->
                 <label class="checkbox-inline"><input type="checkbox"> Trombone</label>
-            <!-- </div> -->
-            <!-- <div class="checkbox-inline spaced"> -->
                 <label class="checkbox-inline"><input type="checkbox"> Baritone</label>
-            <!-- </div> -->
-            <!-- <div class="checkbox-inline spaced"> -->
                 <label class="checkbox-inline"><input type="checkbox"> Bass</label>
-            <!-- </div> -->
-            <!-- <div class="checkbox-inline spaced"> -->
                 <label class="checkbox-inline"><input type="checkbox"> Drumline</label>
-            <!-- </div> -->
-            <!-- <div class="checkbox-inline spaced"> -->
                 <label class="checkbox-inline"><input type="checkbox"> Managers</label>
-            <!-- </div> -->
-            <div id="attn_status"></div>
-            <div class="form-group">
-                <label for="start-date">Start Date:</label>
-                <div class='input-group date datepicker' id='datetimepicker1'>
-                    <input class="form-control " id="start-date" name="start-date" placeholder="MM/DD/YYY" type="text" required>
-                    <span class="input-group-addon ">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
             </div>
-            <div class="form-group">
-                <label for="end-date">End Date:</label>
-                <div class='input-group date datepicker' id='datetimepicker1'>
-                    <input class="form-control " id="end-date" name="end-date" placeholder="MM/DD/YYY" type="text" required>
-                    <span class="input-group-addon ">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
+        <div id="attn_status"></div>
+        <div class="form-group">
+            <label for="start-date">Start Date:</label>
+            <div class='input-group date datepicker' id='datetimepicker1'>
+                <input class="form-control " id="start-date" name="start-date" placeholder="MM/DD/YYY" type="text" required>
+                <span class="input-group-addon ">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
             </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+        </div>
+        <div class="form-group">
+            <label for="end-date">End Date:</label>
+            <div class='input-group date datepicker' id='datetimepicker1'>
+                <input class="form-control " id="end-date" name="end-date" placeholder="MM/DD/YYY" type="text" required>
+                <span class="input-group-addon ">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+            <button id="graph-form-submit" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      
+    </form>
+</div>
 <script>
     $(document).ready(function(){
-      $('.datepicker').datepicker();
+      $('.datepicker').datepicker({ format: 'dd-mm-yyyy' });
     })
 </script>
+<br>
 </section>
-<!-- ======= Graph 1 Form ====== -->
-
+<!-- ======= Overall Form ====== -->
+<div><h3></h3></div>
 <!-- ======= Grabph ====== -->
 <section>
+<div class="container-fluid text-left"> <h2>Attendance Over Time</h2></div>
 <div id="attn-over-time"></div>
 </section>
 <!-- ======= Grabph ====== -->
