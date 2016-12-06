@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Attendance Issue View</title>
+		<meta charset="utf-8">
+
+		<!-- JQuery -->
+		<script src="http://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+		<!-- Bootstrap Date-Picker Plugin -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css"/>
+
+		<!-- JS -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js" integrity="sha256-IxYUmOOk74FUrcx5FEMOHVmTJDb7ZAwnC/ivo/OQGxg=" crossorigin="anonymous"></script>
+
+    <!-- this is one of them Momeeeeeeeeents.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+
+    <!-- Grabph -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<link rel="stylesheet" type="text/css" href="../css/theme.css"> 
+		<link rel="stylesheet" type="text/css" href="../css/index.css">
+
+    <!-- FullCalendar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css">
+    <link rel="stylesheet" media="print" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.print.css">
+
+		<meta name="viewport", content="width=device-width, initial-scale=1">
+	</head>
+
+
+<body>
+
+<!-- ======= Nav Bar ====== -->
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle " data-toggle="collapse" data-target="#myNav">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../index.html"><span class="glyphicon glyphicon-home"></span></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNav">
+                <ul class="nav navbar-nav">
+                    <li><a href="attn.html">REQUESTS</a></li>
+                    <li><a href="#">CALENDAR</a></li>
+                    <li><a href="view.html">SEARCH</a></li>
+                    <li class="active"><a href="#">STATISTICS</a></li>
+                    <li><a href="#">WARMUP BLOCK</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="navbar-brand" href="settings.html"><span class="glyphicon glyphicon-cog"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- ======= Nav Bar ====== -->
+
+<!-- ======= Header ====== -->
+<section id="head" class="dark">
+    <div class="col-xs-2"></div>
+    <div class="container text-left">
+        <h1>Attendance Statistics</h1>
+    </div>
+    <div class="col-xs-2"></div>
+</section>
+<!-- ======= Header ====== -->
+
+
+<!-- ======= Graph 1 Form ====== -->
+<section id="graph-1-form">
+<div class="container-fluid text-left"> <h2>Attendance Over Time</h2></div>
+    <div class="col-xs-12 text-left">
+        <form class="form-inline"role="form" id="attn_req">
+            <div>
+            <label class="control-label">Sections: </label>
+            <!-- <div class="checkbox-inline spaced"> -->
+                <label class="checkbox-inline"><input type="checkbox"> Piccolo</label>
+            <!-- </div> -->
+            <!-- <div class="checkbox-inline spaced"> -->
+                <label class="checkbox-inline"><input type="checkbox"> Clarinet</label>
+            <!-- </div> -->
+            <!-- <div class="checkbox-inline spaced"> -->
+                <label class="checkbox-inline"><input type="checkbox"> Saxaphone</label>
+            <!-- </div> -->
+            <!-- <div class="checkbox-inline spaced"> -->
+                <label class="checkbox-inline"><input type="checkbox"> Trumpet</label>
+            <!-- </div> -->
+            <!-- <div class="checkbox-inline spaced"> -->
+                <label class="checkbox-inline"><input type="checkbox"> Falto</label>
+            <!-- </div> -->
+            <!-- <div class="checkbox-inline spaced"> -->
+                <label class="checkbox-inline"><input type="checkbox"> Trombone</label>
+            <!-- </div> -->
+            <!-- <div class="checkbox-inline spaced"> -->
+                <label class="checkbox-inline"><input type="checkbox"> Baritone</label>
+            <!-- </div> -->
+            <!-- <div class="checkbox-inline spaced"> -->
+                <label class="checkbox-inline"><input type="checkbox"> Bass</label>
+            <!-- </div> -->
+            <!-- <div class="checkbox-inline spaced"> -->
+                <label class="checkbox-inline"><input type="checkbox"> Drumline</label>
+            <!-- </div> -->
+            <!-- <div class="checkbox-inline spaced"> -->
+                <label class="checkbox-inline"><input type="checkbox"> Managers</label>
+            <!-- </div> -->
+            <div id="attn_status"></div>
+            <div class="form-group">
+                <label for="start-date">Start Date:</label>
+                <div class='input-group date datepicker' id='datetimepicker1'>
+                    <input class="form-control " id="start-date" name="start-date" placeholder="MM/DD/YYY" type="text" required>
+                    <span class="input-group-addon ">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="end-date">End Date:</label>
+                <div class='input-group date datepicker' id='datetimepicker1'>
+                    <input class="form-control " id="end-date" name="end-date" placeholder="MM/DD/YYY" type="text" required>
+                    <span class="input-group-addon ">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+<script>
+    $(document).ready(function(){
+      $('.datepicker').datepicker();
+    })
+</script>
+</section>
+<!-- ======= Graph 1 Form ====== -->
+
+<!-- ======= Grabph ====== -->
+<section>
+<div id="attn-over-time"></div>
+</section>
+<!-- ======= Grabph ====== -->
+
+<script src="../scripts/stats.js"></script>
+</body>
