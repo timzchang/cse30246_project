@@ -20,7 +20,7 @@ function searchDate (date) {
 	            return;
     	}
 
-    	var $table = $("table tbody").html('');
+    	var $table = $("#records").html('');
 
         for (var i = 0; i < attn.length; i++) {
     	    var excused = (attn[i].excused == 'Y') ? "Yes" : "No";
@@ -87,7 +87,12 @@ var month_to_num = {
 	Dec: "12"
 }
 
-function formatDate (date) {
+function formatDate(date) {
+    var new_date = date.split("-");
+    return new_date[1] + "/" + new_date[2] + "/" + new_date[0];
+}
+
+function formatDateForReq (date) {
 	date = date.toString().split(" ");
 
 	var month = month_to_num[date[1]];
@@ -104,13 +109,82 @@ $(function () {
 		    center: 'title',
 		    right:  ''
 		},
-		dayClick: function (day) {
-			// Tue Dec 06 2016 00:00:00 GMT+0000
-			
-			day = formatDate(day);
-			// alert(day);
+	dayClick: function (day) {
+	    // Tue Dec 06 2016 00:00:00 GMT+0000
+	    day = formatDateForReq(day);
+            $('#date').data({date: day});
 
-			searchDate(day)
-		}
+            searchDate(day)
+            $('html, body').animate({
+                scrollTop: $("#table-head").offset().top
+                //scrollTop: $("#table-head").prop("ScrollHeight")
+            }, 200);
+        }
     });
+    $('#edit-issue-submit').on('click', function(event) {
+        $('#edit-issue-form').submit();
+    });
+    $('#edit-issue-form').on('submit', function(event) {
+        if (event.isDefaultPrevented()) {
+            // handle the invalid form...
+            console.log("default event not prevented");
+        } else {
+            // everything looks good!
+            event.preventDefault();
+            var r = 0;
+            var netid = $("#form-netid").val();
+            var old_date = $("#form-date").val().split("/");
+            var date = old_date[2] + "-" + old_date[0] + "-" + old_date[1];
+            var event_type = $('#event-type option:selected').val();
+            var absence_type = ($("input[name=type]:checked").val() == "absent") ? 'A' : 'L';
+            var excused = ($("input[name=excused]:checked").val() == "yes") ? 'Y' : 'N';
+
+            if(!netid || !$("#form-date").val()) {
+                return;
+            }
+
+            $.post("../db/update_issue.php",
+            {
+                netid: netid,
+                date: date,
+                event_type: event_type,
+                absence_type: absence_type,
+                excused: excused
+            }).done(function(resp) {
+                console.log(resp);
+                $('#edit-issue-modal').modal('hide');
+                searchDate($('#date').data().date);
+                console.log($('#date').data().date);
+            }).fail(function(err) {
+                console.log(err);
+            });
+        }
+    });
+    $('#del-issue-submit').on('click', function (event) {
+        if (event.isDefaultPrevented()) {
+            // handle the invalid form...
+            console.log("default event not prevented");
+        } else {
+            // everything looks good!
+            event.preventDefault();
+
+            var mem = $('#del-issue-modal').data();
+            if (!mem || !mem.hasOwnProperty('netid') || !mem.hasOwnProperty('date')) {
+                console.log('invalid delete');
+		        console.log(mem.netid);
+		        console.log(mem.date);
+                return;
+            }
+
+            $.post('../db/delete_issue.php', {
+                netid: mem.netid,
+                date: mem.date
+            }).done(function(resp) {
+                searchDate($('#date').data().date);
+                console.log(resp);
+            }).fail(function(resp) {
+                console.log(resp);
+            });
+        }
+    })
 });

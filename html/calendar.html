@@ -8,6 +8,10 @@
 		<script src="http://code.jquery.com/jquery-3.1.1.min.js"
 		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
+		<!-- Bootstrap Date-Picker Plugin -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css"/>
+
 		<!-- JS -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
     		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -67,15 +71,20 @@
 <div class="col-lg-1"></div>
 <div class="container-fluid col-lg-10" id="calendar"></div>
 <div class="col-lg-1"></div>
+<div id="date"></div>
 <!-- ======= Calendar ====== -->
+<style type="text/css">
+#calendar {
+margin-bottom:50px;
+}
 
+</style>
 <!-- ======= Table ====== -->
-<br>
-<section id="table">
+<section >
 <div class="container text-left">
-<div id="resp_table">
-<table class="table table-bordered">
-    <thead>
+<div id="r_table">
+<table class="table table-bordered" >
+    <thead id="table-head">
       <tr>
         <th>netid</th>
         <th>Date</th>
@@ -85,7 +94,7 @@
        <th>Edit</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="records">
     </tbody>
 </table>
 </div>
@@ -93,5 +102,114 @@
 </section>
 <!-- ======= Table ====== -->
 
+<!-- ======= Modal ====== -->
+<div id="edit-issue-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="edit-issue-form" class="form-horizontal">
+                    <fieldset>
+                    <legend>Update Issue</legend>
+                    <div class="form-group">
+                      <label for="netid" class="col-lg-2 control-label">netid</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="netid" id="form-netid" placeholder="kdye" required>
+                      </div>
+                    </div>
+                    <div class="form-group"> <!-- Date input -->
+                        <label class="col-lg-2 control-label" for="date">Date</label>
+                        <div class="col-lg-10">
+                            <div class='input-group date datepicker' id='datetimepicker1'>
+                                <input class="form-control " id="form-date" name="form-date" placeholder="MM/DD/YYY" type="text" required>
+                                <span class="input-group-addon ">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="event-type" class="col-lg-2 control-label">Event Type</label>
+                      <div class="col-lg-10">
+                        <select class="form-control" id="event-type">
+                            <option>Practice</option>
+                            <option>Marchout</option>
+                            <option>Game</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-2 control-label">Absence Type</label>
+                      <div class="col-lg-10">
+                        <div class="radio">
+                          <label>
+                            <input type="radio" name="type" id="type-absent" value="absent" checked="">
+                            Absent
+                          </label>
+                        </div>
+                        <div class="radio">
+                          <label>
+                            <input type="radio" name="type" id="type-late" value="late">
+                            Late
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-2 control-label">Excused?</label>
+                      <div class="col-lg-10">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="excused" id="excused-yes" value="yes" checked="">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="radio">
+                          <label>
+                            <input type="radio" name="excused" id="excused-no" value="no">
+                            No
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-10 col-lg-offset-2">
+                        <button type="reset" class="btn btn-default" data-dismiss="modal">cancel</button>
+                        <button id="edit-issue-submit" type="submit" class="btn btn-primary" >submit</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+      $('.datepicker').datepicker();
+    })
+</script>
+<!-- ======= Modal ====== -->
+
+<!-- ======= Del Modal ====== -->
+<div id="del-issue-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete Issue</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete? This cannot be undone</p>
+            </div>
+            <div class="modal-footer">
+                 <div class="col-lg-10 col-lg-offset-2">
+                     <button type="reset" class="btn btn-default" data-dismiss="modal">cancel</button>
+                     <button id="del-issue-submit" type="submit" class="btn btn-primary" data-dismiss="modal">submit</button>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ======= Del Modal ====== -->
 <script src="../scripts/calendar.js"></script>
 </body>
