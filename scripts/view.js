@@ -141,6 +141,7 @@ $(function () {
                 console.log('update success');
                 console.log(resp);
                 r = 1;
+                $('#edit-issue-modal').modal('hide');
                 submitForm();
             }).fail(function(err) {
                 console.log(err);
