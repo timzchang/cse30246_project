@@ -28,17 +28,11 @@ $begin = new DateTime("$start_date");
 $end = new DateTime("$end_date");
 $interval = new DateInterval('P1D');
 
-$period = new DatePeriod($begin,$interval,$end);
+$period = new DatePeriod($begin,$interval,$end->add(new DateInterval('P1D')));
 
 # result array
 $numbers = array();
 $section_numbers = array();
-foreach($sections as $section){
-	#echo $section;
-}
-foreach($period as $dt){
-	#echo $dt->format('Y-m-d');
-}
 foreach($sections as $section){
     foreach($period as $dt){
 	$dt_str = $dt->format('Y-m-d');
@@ -87,7 +81,6 @@ foreach($sections as $section){
 	    echo "Error";
 	}
 
-#echo $sql;
         $result = mysqli_query($link,$sql) or die('Query failed" ' . mysql_error());
     
         if($result->num_rows != 0){
@@ -96,7 +89,6 @@ foreach($sections as $section){
             # get event type from the row
             $number = $row[0];
             $numbers[$dt->format('Y-m-d')] = $number;
-            #echo $number;
         # if there is no event on the date, return error
         } else {
             echo "No match";
@@ -104,8 +96,6 @@ foreach($sections as $section){
     }
     $section_numbers[$section] = $numbers;
 }
-#echo $section_numbers;
-#echo $section_numbers["Trombone"]['2016-10-10'];
 header('Content-Type: application/json');
 echo json_encode($section_numbers);
 
