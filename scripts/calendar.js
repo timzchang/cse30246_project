@@ -19,8 +19,8 @@ function searchDate (date) {
 	        }
 	            return;
     	}
-        $('div h2').html('');
-        $('div h2').append('Issues for ' + attn[0].type + ' on ' + formatDate(attn[0].date));
+        $('#table-title').html('');
+        $('#table-title').append('Issues for ' + attn[0].type + ' on ' + formatDate(attn[0].date));
         $('#table-head').html('');
         $("#table-head").append(' <tr> <th>Last Name</th> <th>First Name</th> <th>netid</th> <th>Late/Absent</th> <th>Excused?</th> <th>Edit</th> </tr>')
 
@@ -107,23 +107,38 @@ function formatDateForReq (date) {
 }
 
 $(function () {
+    $.get('../db/get_all_events.php', {
+    }).done(function (events, status) {
+        // [{type: type, date: date}, ...]
+        temp = new Date(events[0].date + " GMT-0400");
+        events_arr = [];
+        for (e in events) {
+            events_arr.push({title: events[e].type, 
+                             start: new Date(events[e].date + " GMT-0400"),
+                             allDay: true,
+                             className: 'fc-event-height-override'
+                            });
+        }
     $('#calendar').fullCalendar({
     	header: {
 		    left:   'today prev next',
 		    center: 'title',
 		    right:  ''
 		},
-	dayClick: function (day) {
+        events: events_arr,
+	eventClick: function (e) {
 	    // Tue Dec 06 2016 00:00:00 GMT+0000
-	    day = formatDateForReq(day);
+	    day = formatDateForReq(e.start.toString());
             $('#date').data({date: day});
 
             searchDate(day)
             $('html, body').animate({
                 scrollTop: $("#table-head").offset().top
-                //scrollTop: $("#table-head").prop("ScrollHeight")
             }, 200);
         }
+    });
+    }).fail(function(resp) {
+        console.log(resp);
     });
     $('#edit-issue-submit').on('click', function(event) {
         $('#edit-issue-form').submit();
