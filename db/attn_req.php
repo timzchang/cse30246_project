@@ -31,13 +31,13 @@ if($result->num_rows != 0){
     if($result) {
     	echo "Created new attendance issue.";
     } else {
-        echo "Error: attendance issue not created.";
+        echo "Error - attendance issue not created.";
     }
 } else {
     # if there was no event on that date, return that information to the user
     $date = date_create_from_format('Y-m-d',$date);
     $date = $date->format('l, F d, Y');
-    echo "There is no $event_type event on $date.";
+    echo "Error - no event on $date. Please try again.";
 }
 
 ?>
