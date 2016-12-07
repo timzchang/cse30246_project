@@ -14,6 +14,7 @@ $sql = "SELECT * FROM events;";
 # run the SQL query and store the result
 $result = mysqli_query($link,$sql) or die('Query failed" ' . mysql_error());
 
+$response = array();
 # if no issues exist:
 if ($result && mysqli_num_rows($result) == 0) {
     echo "empty";
