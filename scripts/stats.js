@@ -18,7 +18,7 @@ var Sections = {
  */
 
  Morris.Bar({
-  element: 'bar-example2',
+  element: 'bar-ratio',
   data: [
     { y: '2006', a: 100, b: 90 },
     { y: '2007', a: 75,  b: 65 },
@@ -142,7 +142,8 @@ $(function () {
 			$bar_labels.push('Unexcused - Absent');
 			$bar_colors.push('red');}
 		}
-		$bar_data.push($temp_obj);
+		$bar_count_data.push($temp_obj);
+		$bar_ratio_data.push($ratio_obj);
 	}
 	 Morris.Bar({
   		  element: 'bar-count',
@@ -154,11 +155,6 @@ $(function () {
 		  barColors: $bar_colors
 		});
 
-
-      /*}).fail(function (err) {
-        console.log("failed")
-        console.log(err);
-      });
       Morris.Bar({
   		  element: 'bar-ratio',
   		  data: $bar_ratio_data,
@@ -167,7 +163,7 @@ $(function () {
 		  labels: $bar_labels,
 		  stacked: 'true',
 		  barColors: $bar_colors
-		});*/
+		});
 
 
       }).fail(function (err) {
