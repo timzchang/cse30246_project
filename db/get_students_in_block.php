@@ -19,7 +19,7 @@ LEFT JOIN (
   SELECT date, netid, excused
   FROM events, attendance_issues
   WHERE events.eventid = attendance_issues.eventid
-  AND events.date = '2016-11-16') A
+  AND events.date = '$date') A
 ON students.netid=A.netid
 LIMIT 10;"
 
