@@ -116,31 +116,53 @@ $(function () {
         end_date: $('#end-date').val()
       }).done(function(absences, status){
         //barGraph(absences);
-	console.log(absences[0]);
 	$('#bar-example').html('');
+	$('#bar-example2').html('');
 	$bar_data = [];
+	$bar_ratio_data = [];
+	$bar_ykeys = [];
+	$bar_labels = [];
+	$bar_colors = [];
 	for( var i = 0; i < absences.length; i ++){
-		$section = absences[i].section;
-		$excused_late = absences[i].excused_late;
-		$excused_absent = absences[i].excused_absent;
-		$unexcused_late = absences[i].unexcused_late;
-		$unexcused_absent = absences[i].unexcused_absent;
-		$temp_obj = {
-			section: $section, 
-			excused_late:     $excused_late,
-			excused_absent:   $excused_absent,
-			unexcused_late:   $unexcused_late,
-			unexcused_absent: $unexcused_absent
-		};
+		$temp_obj = {};
+		$temp_obj.section = absences[i].section;
+		if(excused && late){
+			$temp_obj.excused_late = absences[i].excused_late;
+			if( i == 0){
+				$bar_ykeys.push('excused_late');
+				$bar_labels.push('Excused - Late');
+				$bar_colors.push('darkgreen');
+			}
+		} if(excused && absent){
+			$temp_obj.excused_absent = absences[i].excused_absent;
+			if( i == 0){
+			$bar_ykeys.push('excused_absent');
+			$bar_labels.push('Excused - Absent'); 
+			$bar_colors.push('darkblue')}
+		} if(unexcused && late){
+			$temp_obj.unexcused_late = absences[i].unexcused_late;
+			if( i == 0){
+			$bar_ykeys.push('unexcused_late');
+			$bar_labels.push('Unexcused - Late'); 
+			$bar_colors.push('darkred'); }
+		}
+		if(unexcused && absent){
+			$temp_obj.unexcused_absent = absences[i].unexcused_absent;
+			if( i == 0){
+			$bar_ykeys.push('unexcused_absent');
+			$bar_labels.push('Unexcused - Absent'); 
+			$bar_colors.push('red');}
+		}
 		$bar_data.push($temp_obj);
 	}
 	 Morris.Bar({
   		  element: 'bar-example',
   		  data: $bar_data,
 		  xkey: 'section',
-		  ykeys: ['excused_late', 'excused_absent'],
-		  labels: ['Excused - Late', 'Excused - Absent'],
-		  stacked: 'true'
+		  ykeys: $bar_ykeys,
+		  labels: $bar_labels,
+		  stacked: 'true',
+		  barColors: $bar_colors
 		});
 			
 		
