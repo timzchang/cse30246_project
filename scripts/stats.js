@@ -98,6 +98,7 @@ $(function () {
       console.log("default event not prevented");
     } else {
       // everything looks good!
+      console.log("Something happened!");
       event.preventDefault();
       $.post("../db/get_number_of_issues_in_date_range.php", {
         start_date: $('#start-date').val(),
@@ -113,6 +114,34 @@ $(function () {
         end_date: $('#end-date').val()
       }).done(function(absences, status){
         //barGraph(absences);
+	console.log(absences[0]);
+	$('#bar-example').html('');
+	$bar_data = [];
+	for( var i = 0; i < absences.length; i ++){
+		$section = absences[i].section;
+		$excused_late = absences[i].excused_late;
+		$excused_absent = absences[i].excused_absent;
+		$unexcused_late = absences[i].unexcused_late;
+		$unexcused_absent = absences[i].unexcused_absent;
+		$temp_obj = {
+			section: $section, 
+			excused_late:     $excused_late,
+			excused_absent:   $excused_absent,
+			unexcused_late:   $unexcused_late,
+			unexcused_absent: $unexcused_absent
+		};
+		$bar_data.push($temp_obj);
+	}
+	 Morris.Bar({
+  		  element: 'bar-example',
+  		  data: $bar_data,
+		  xkey: 'section',
+		  ykeys: ['excused_late', 'excused_absent'],
+		  labels: ['Excused - Late', 'Excused - Absent'],
+		  stacked: 'true'
+		});
+			
+		
       }).fail(function (err) {
         console.log("failed")
         console.log(err);

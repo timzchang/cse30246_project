@@ -1,7 +1,7 @@
 <?php
 
-$start_date = $_POST["start_date"]
-$end_date = $_POST["end_date"]
+$start_date = $_POST["start_date"];
+$end_date = $_POST["end_date"];
 
 # link to dsg
 $link = mysqli_connect('localhost','csyers','trombone') or die('Could not connect: ' . mysql_error());
@@ -97,7 +97,7 @@ ON 			G.section = H.section) I ORDER BY total) J
 LEFT JOIN
 (
 SELECT section, COUNT(*) as members FROM students GROUP BY section
-) K ON J.section = K.section;"
+) K ON J.section = K.section;";
 
 # get the result of the query
 $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
