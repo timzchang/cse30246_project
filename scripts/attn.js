@@ -20,8 +20,8 @@ function submitForm () {
     var date = $("#form-date").val()
     date = formatDate(date);
     var excused = $("#excused").val();
-    var absence_type = ($("#absent_type").val() == "absent") ? 'A' : 'L';
-    var excused = ($("#excused").val() == "yes") ? 'Y' : 'N';
+    var absence_type = ($("#absent_type").val() == "Absent") ? 'A' : 'L';
+    var excused = ($("#excused").val() == "Yes") ? 'Y' : 'N';
     $.post("../db/attn_req.php",
     {
         netid: netid,
