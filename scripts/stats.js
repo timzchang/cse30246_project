@@ -155,7 +155,7 @@ $(function () {
 		});
 
 
-      }).fail(function (err) {
+      /*}).fail(function (err) {
         console.log("failed")
         console.log(err);
       });
@@ -167,7 +167,7 @@ $(function () {
 		  labels: $bar_labels,
 		  stacked: 'true',
 		  barColors: $bar_colors
-		});
+		});*/
 
 
       }).fail(function (err) {
