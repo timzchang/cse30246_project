@@ -111,6 +111,9 @@ $(function () {
     $('#edit-issue-submit').on('click', function(event) {
         $('#edit-issue-form').submit();
     });
+    $('#edit-issue-cancel').on('click', function(event) {
+        $('#edit-issue-modal').modal('hide');
+    });
     $('#edit-issue-form').on('submit', function(event) {
         if (event.isDefaultPrevented()) {
             // handle the invalid form...
@@ -139,6 +142,7 @@ $(function () {
                 excused: excused
             }).done(function(resp) {
                 console.log('update success');
+                $('#edit-issue-modal').modal('hide');
                 console.log(resp);
                 r = 1;
                 $('#edit-issue-modal').modal('hide');
@@ -147,7 +151,6 @@ $(function () {
                 console.log(err);
             });
             if (r==1) {
-                $('#edit-issue-modal').modal('hide');
             }
         }
     });
