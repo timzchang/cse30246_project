@@ -92,10 +92,10 @@
         <div>
         <label class="control-label">Absence Types: </label>
             <div id="ex_or_la" class="col-xs-12">
-                <label class="checkbox-inline"><input name="ex" type="checkbox" value="excused"> Excused </label>
-                <label class="checkbox-inline"><input name="ex" type="checkbox" value="unexcused"> Unexcused</label>
-                <label class="checkbox-inline"><input name="late" type="checkbox" value="excused"> Late </label>
-                <label class="checkbox-inline"><input name="late" type="checkbox" value="unexcused"> Absent</label>
+                <label class="checkbox-inline"><input name="ex" type="checkbox" id="excused_id"> Excused </label>
+                <label class="checkbox-inline"><input name="ex" type="checkbox" id="unexcused_id"> Unexcused</label>
+                <label class="checkbox-inline"><input name="late" type="checkbox" id="late_id"> Late </label>
+                <label class="checkbox-inline"><input name="late" type="checkbox" id="absent_id"> Absent</label>
             </div>
         </div>
         <label class="control-label">Sections: </label>
@@ -105,14 +105,14 @@
             <div id="sections" class="col-xs-12">
                 <label class="checkbox-inline"><input name="section" type="checkbox" value="Piccolo"> Piccolo</label>
                 <label class="checkbox-inline"><input name="section" type="checkbox" value="Clarinet"> Clarinet</label>
-                <label class="checkbox-inline"><input name="section" type="checkbox" value="Saxaphone"> Saxaphone</label>
+                <label class="checkbox-inline"><input name="section" type="checkbox" value="Saxophone"> Saxophone</label>
                 <label class="checkbox-inline"><input name="section" type="checkbox" value="Trumpet"> Trumpet</label>
-                <label class="checkbox-inline"><input name="section" type="checkbox" value="Faltos"> Falto</label>
+                <label class="checkbox-inline"><input name="section" type="checkbox" value="Falto"> Falto</label>
                 <label class="checkbox-inline"><input name="section" type="checkbox" value="Trombone"> Trombone</label>
-                <label class="checkbox-inline"><input name="section" type="checkbox" value="Bariton"> Baritone</label>
+                <label class="checkbox-inline"><input name="section" type="checkbox" value="Baritone"> Baritone</label>
                 <label class="checkbox-inline"><input name="section" type="checkbox" value="Bass"> Bass</label>
                 <label class="checkbox-inline"><input name="section" type="checkbox" value="Drumline"> Drumline</label>
-                <label class="checkbox-inline"><input name="section" type="checkbox" value="Managers"> Managers</label>
+                <label class="checkbox-inline"><input name="section" type="checkbox" value="Manager"> Manager</label>
             </div>
         <div id="attn_status"></div>
         <div class="form-group">
@@ -139,7 +139,7 @@
 </div>
 <script>
     $(document).ready(function(){
-      $('.datepicker').datepicker({ format: 'dd-mm-yyyy' });
+      $('.datepicker').datepicker({ format: 'yyyy-mm-dd' });
     })
 </script>
 <br>
