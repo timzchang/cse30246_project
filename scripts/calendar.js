@@ -19,6 +19,10 @@ function searchDate (date) {
 	        }
 	            return;
     	}
+        $('div h2').html('');
+        $('div h2').append('Issues for ' + attn[0].type + ' on ' + formatDate(attn[0].date));
+        $('#table-head').html('');
+        $("#table-head").append(' <tr> <th>Last Name</th> <th>First Name</th> <th>netid</th> <th>Late/Absent</th> <th>Excused?</th> <th>Edit</th> </tr>')
 
     	var $table = $("#records").html('');
 
@@ -187,4 +191,13 @@ $(function () {
             });
         }
     })
+    $('#to_top').on('click', function (event) {
+        if (event.isDefaultPrevented()) {
+            // handle the invalid form...
+            console.log("default event not prevented");
+        } else {
+            event.preventDefault();
+            window.scrollTo(0,0);
+        }
+   });
 });
