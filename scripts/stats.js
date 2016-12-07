@@ -1,4 +1,15 @@
-var Sections = {}
+var Sections = {
+    Piccolo: false,
+    Clarinet: false,
+    Saxaphone: false,
+    Trumpet: false,
+    Falto: false,
+    Trombone: false,
+    Baritone: false,
+    Bass: false,
+    Drumline: false,
+    Managers: false
+}
 
 /*
  * Play with this code and it'll update in the panel opposite.
@@ -23,6 +34,28 @@ var Sections = {}
 
 $(function () {
   $('#graph-form-submit').on('click', function (event) {
+    var field = []
+    var checked = {
+        ex : $('input[name=ex]:checked').length,
+        late: $('input[name=late]:checked').length,
+        all: $('input[name=all]:checked').length,
+        section: $('input[name=section]:checked').length
+    }
+    for(var key in checked) {
+        if (checked.hasOwnProperty(key)) {
+            if (checked.key == 0) {
+                field.push(key)
+            }
+        }
+    }
+    if(field.length > 0) {
+       var msg = "You must select at least one of ";
+       for (var i=0; i < field.length; i++) {
+           msg += field[i] + " ";
+       }
+       alert(msg);
+       return;
+    }
     $('#graph-form').submit();
   });
   $('#graph-form').on('submit', function (event) {
@@ -32,16 +65,25 @@ $(function () {
     } else {
       // everything looks good!
       event.preventDefault();
-      $.get({
-        url: "../db/view_search.php",
-        data: {
-            netid: netid
-        }
-      }).done(function(attn, status){
-        $('div h3').append(attn)
+      $.post("../db/get_number_of_issues_in_date_range.php", {
+        start_date: $('#start-date').val(),
+        end_date: $('#end-date').val()
+      }).done(function(absences, status){
+        //lineGraph(absences);
       }).fail(function (err) {
+        console.log("failed")
         console.log(err);
       });
+      $.post("../db/bar_info.php", {
+        start_date: $('#start-date').val(),
+        end_date: $('#end-date').val()
+      }).done(function(absences, status){
+        //barGraph(absences);
+      }).fail(function (err) {
+        console.log("failed")
+        console.log(err);
+      });
+
     }
   });
 });

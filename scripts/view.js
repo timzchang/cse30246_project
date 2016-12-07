@@ -18,6 +18,7 @@ $("#success-closebtn").on('click', function (event) {
 
 function formatDate(date) {
     var new_date = date.split("-");
+    console.log(date);
     return new_date[1] + "/" + new_date[2] + "/" + new_date[0];
 }
 

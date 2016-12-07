@@ -89,26 +89,35 @@
 <div class="col-xs-12 text-left">
     <form class="form-inline"role="form" id="graph-form">
         <div>
+        <div>
+        <label class="control-label">Absence Types: </label>
+            <div id="ex_or_la" class="col-xs-12">
+                <label class="checkbox-inline"><input name="ex" type="checkbox" value="excused"> Excused </label>
+                <label class="checkbox-inline"><input name="ex" type="checkbox" value="unexcused"> Unexcused</label>
+                <label class="checkbox-inline"><input name="late" type="checkbox" value="excused"> Late </label>
+                <label class="checkbox-inline"><input name="late" type="checkbox" value="unexcused"> Absent</label>
+            </div>
+        </div>
         <label class="control-label">Sections: </label>
             <div id="all-sections" class="col-xs-12">
-                <label class="checkbox-inline"><input type="checkbox"> All</label>
+                <label class="checkbox-inline"><input name="all" type="checkbox"> All</label>
             </div>
             <div id="sections" class="col-xs-12">
-                <label class="checkbox-inline"><input type="checkbox"> Piccolo</label>
-                <label class="checkbox-inline"><input type="checkbox"> Clarinet</label>
-                <label class="checkbox-inline"><input type="checkbox"> Saxaphone</label>
-                <label class="checkbox-inline"><input type="checkbox"> Trumpet</label>
-                <label class="checkbox-inline"><input type="checkbox"> Falto</label>
-                <label class="checkbox-inline"><input type="checkbox"> Trombone</label>
-                <label class="checkbox-inline"><input type="checkbox"> Baritone</label>
-                <label class="checkbox-inline"><input type="checkbox"> Bass</label>
-                <label class="checkbox-inline"><input type="checkbox"> Drumline</label>
-                <label class="checkbox-inline"><input type="checkbox"> Managers</label>
+                <label class="checkbox-inline"><input name="section" type="checkbox" value="Piccolo"> Piccolo</label>
+                <label class="checkbox-inline"><input name="section" type="checkbox" value="Clarinet"> Clarinet</label>
+                <label class="checkbox-inline"><input name="section" type="checkbox" value="Saxaphone"> Saxaphone</label>
+                <label class="checkbox-inline"><input name="section" type="checkbox" value="Trumpet"> Trumpet</label>
+                <label class="checkbox-inline"><input name="section" type="checkbox" value="Faltos"> Falto</label>
+                <label class="checkbox-inline"><input name="section" type="checkbox" value="Trombone"> Trombone</label>
+                <label class="checkbox-inline"><input name="section" type="checkbox" value="Bariton"> Baritone</label>
+                <label class="checkbox-inline"><input name="section" type="checkbox" value="Bass"> Bass</label>
+                <label class="checkbox-inline"><input name="section" type="checkbox" value="Drumline"> Drumline</label>
+                <label class="checkbox-inline"><input name="section" type="checkbox" value="Managers"> Managers</label>
             </div>
         <div id="attn_status"></div>
         <div class="form-group">
             <label for="start-date">Start Date:</label>
-            <div class='input-group date datepicker' id='datetimepicker1'>
+            <div class='input-group date datepicker' >
                 <input class="form-control " id="start-date" name="start-date" placeholder="MM/DD/YYY" type="text" required>
                 <span class="input-group-addon ">
                     <span class="glyphicon glyphicon-calendar"></span>
@@ -117,7 +126,7 @@
         </div>
         <div class="form-group">
             <label for="end-date">End Date:</label>
-            <div class='input-group date datepicker' id='datetimepicker1'>
+            <div class='input-group date datepicker' >
                 <input class="form-control " id="end-date" name="end-date" placeholder="MM/DD/YYY" type="text" required>
                 <span class="input-group-addon ">
                     <span class="glyphicon glyphicon-calendar"></span>
