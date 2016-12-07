@@ -1,4 +1,5 @@
 $("#view").validator().on("submit", function (event) {
+
     if (event.isDefaultPrevented()) {
         // handle the invalid form...
         console.log("something wrong");

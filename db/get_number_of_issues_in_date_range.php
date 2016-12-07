@@ -1,21 +1,21 @@
 <?php
 
 # get information from POST command
-#$start_date = $_POST["start_date"];
-#$end_date = $_POST["end_date"];
-#$sections = $_POST["sections"];
-#$excused = $_POST["excused"];
-#$unexcused = $_POST["unexcused"];
-#$late = $_POST["late"];
-#$absent = $_POST["absent"];
+$start_date = $_POST["start_date"];
+$end_date = $_POST["end_date"];
+$sections = $_POST["sections"];
+$excused = $_POST["excused"];
+$unexcused = $_POST["unexcused"];
+$late = $_POST["late"];
+$absent = $_POST["absent"];
 
-$start_date = '2016-08-01';
-$end_date = '2016-12-12';
-$sections = ['Trombone', 'Trumpet'];
-$excused = "Y";
-$unexcused = "Y";
-$late = "Y";
-$absent = "Y";
+#$start_date = '2016-08-01';
+#$end_date = '2016-12-12';
+#$sections = ['Trombone', 'Trumpet'];
+#$excused = "Y";
+#$unexcused = "Y";
+#$late = "Y";
+#$absent = "Y";
 
 # link to dsg
 $link = mysqli_connect('localhost','csyers','trombone') or die('Could not connect: ' . mysql_error());
@@ -54,20 +54,20 @@ foreach($sections as $section){
             echo "Error: must select at least one late/absent";
             return;
         } else if ($excused == "Y" && $unexcused == "N" && $late == "Y" && $absent == "Y"){
-            $sql .= " AND attendnace_issues.excused = 'Y';";
+            $sql .= " AND attendance_issues.excused = 'Y';";
         } else if ($excused == "Y" && $unexcused == "N" && $late == "Y" && $absent == "N"){
-            $sql .= " AND attendnace_issues.excused = 'Y' AND attendance_issues.absence_type = 'L';";
+            $sql .= " AND attendance_issues.excused = 'Y' AND attendance_issues.absence_type = 'L';";
         } else if ($excused == "Y" && $unexcused == "N" && $late == "N" && $absent == "Y"){
-            $sql .= " AND attendnace_issues.excused = 'Y' AND attendance_issues.absence_type = 'A';";
+            $sql .= " AND attendance_issues.excused = 'Y' AND attendance_issues.absence_type = 'A';";
         } else if ($excused == "Y" && $unexcused == "N" && $late == "N" && $absent == "N"){
             echo "Error: must select at least one late/absent";
             return;
         } else if ($excused == "N" && $unexcused == "Y" && $late == "Y" && $absent == "Y"){
-            $sql .= " AND attendnace_issues.excused = 'N';";
+            $sql .= " AND attendance_issues.excused = 'N';";
         } else if ($excused == "N" && $unexcused == "Y" && $late == "Y" && $absent == "N"){
-            $sql .= " AND attendnace_issues.excused = 'N' AND attendance_issues.absence_type = 'L';";
+            $sql .= " AND attendance_issues.excused = 'N' AND attendance_issues.absence_type = 'L';";
         } else if ($excused == "N" && $unexcused == "Y" && $late == "N" && $absent == "Y"){
-            $sql .= " AND attendnace_issues.excused = 'N' AND attendance_issues.absence_type = 'A';";
+            $sql .= " AND attendance_issues.excused = 'N' AND attendance_issues.absence_type = 'A';";
         } else if ($excused == "N" && $unexcused == "Y" && $late == "N" && $absent == "N"){
             echo "Error: must select at least one late/absent";
             return;
@@ -87,6 +87,7 @@ foreach($sections as $section){
 	    echo "Error";
 	}
 
+#echo $sql;
         $result = mysqli_query($link,$sql) or die('Query failed" ' . mysql_error());
     
         if($result->num_rows != 0){

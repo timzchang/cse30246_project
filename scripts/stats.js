@@ -1,14 +1,14 @@
 var Sections = {
     Piccolo: false,
     Clarinet: false,
-    Saxaphone: false,
+    Saxophone: false,
     Trumpet: false,
     Falto: false,
     Trombone: false,
     Baritone: false,
     Bass: false,
     Drumline: false,
-    Managers: false
+    Manager: false
 }
 
 /*
@@ -50,49 +50,35 @@ var Sections = {
   stacked: 'true'
 });
 
-Morris.Line({
+var lin = Morris.Line({
   element: 'attn-over-time',
   data: [
-  { y: '2006', a: 100, b: 90 },
-  { y: '2007', a: 75,  b: 65 },
-  { y: '2008', a: 50,  b: 40 },
-  { y: '2009', a: 75,  b: 65 },
-  { y: '2010', a: 50,  b: 40 },
-  { y: '2011', a: 75,  b: 65 },
-  { y: '2012', a: 100, b: 90 }
+  { y: '20016', a: 0 },
   ],
   xkey: 'y',
-  ykeys: ['a', 'b'],
-  labels: ['Series A', 'Series B']
+  ykeys: ['a'],
+  labels: ['Band']
 });
 
 $(function () {
   $('#graph-form-submit').on('click', function (event) {
-    var field = []
-    var checked = {
-        ex : $('input[name=ex]:checked').length,
-        late: $('input[name=late]:checked').length,
-        all: $('input[name=all]:checked').length,
-        section: $('input[name=section]:checked').length
-    }
-    for(var key in checked) {
-        if (checked.hasOwnProperty(key)) {
-            if (checked.key == 0) {
-                field.push(key)
-            }
-        }
-    }
+    var field = [];
+    ($('input[name=ex]:checked').length) ? field.push() :  field.push("Excused/Unexcused");
+    ($('input[name=late]:checked').length) ? field.push() : field.push("Late/Absent");
+    ($('input[name=all]:checked').length || $('input[name=section]:checked').length) ? field.push() : field.push("Sections");
     if(field.length > 0) {
        var msg = "You must select at least one of ";
        for (var i=0; i < field.length; i++) {
-           msg += field[i] + " ";
+           (i == field.length - 1) ? (field.length == 1) ? msg += field[i] : msg += "and " + field[i] : msg += field[i] + ", ";
        }
        alert(msg);
+       event.preventDefault();
        return;
     }
-    $('#graph-form').submit();
-  });
-  $('#graph-form').on('submit', function (event) {
+    //$('#graph-form').submit();
+  //});
+  //$('#graph-form').on('submit', function (event) {
+  $('#graph-form').unbind('submit').bind('submit', function (event) {
     if (event.isDefaultPrevented()) {
       // handle the invalid form...
       console.log("default event not prevented");
@@ -100,11 +86,27 @@ $(function () {
       // everything looks good!
       console.log("Something happened!");
       event.preventDefault();
+      var s_date = $('#start-date').val();
+      var  end_date = $('#end-date').val();
+      var excused  =$('#excused_id').is(':checked');
+      var  unexcused = $('#unexcused_id').is(':checked');
+      var  late = $('#late_id').is(':checked');
+      var  absent = $('#absent_id').is(':checked');
+
+      var section_vals = [];
+      ($('input[name=all]:checked').length > 0) ?
+        $('input[name=section]').each(function() { section_vals.push($(this).val());}) :
+        $('input[name=section]:checked').each(function() { section_vals.push($(this).val());})
       $.post("../db/get_number_of_issues_in_date_range.php", {
-        start_date: $('#start-date').val(),
-        end_date: $('#end-date').val()
+        start_date: s_date,
+        end_date: end_date,
+        sections: section_vals,
+        excused: excused,
+        unexcused: unexcused,
+        late: late, 
+        absent: absent
       }).done(function(absences, status){
-        //lineGraph(absences);
+        lineGraph(absences);
       }).fail(function (err) {
         console.log("failed")
         console.log(err);
@@ -149,4 +151,48 @@ $(function () {
 
     }
   });
+  });
 });
+
+function lineGraph(attn, lin) {
+  // attn format
+  // {section_name : {date1: num_absent, date2: num_absent, ...}, ...}
+  // need {date: 'date', section_name: num_absent, ...}
+  $('#attn-over-time').html('');
+  sections = Object.keys(attn);
+  console.log(attn);
+  
+  data = [];
+  for(p in attn[sections[0]]) {
+    data.push({y: p});
+  }
+  console.log(data);
+
+  for(section in attn) {
+    for(date in attn[section]) {
+    for(var i=0; i<data.length; i++) {
+      data[i][section] = attn[section][date];
+      console.log(section + " " + attn[section][date]);
+    }
+    }
+  }
+  console.log(data);
+
+  Morris.Line({
+    element: 'attn-over-time',
+    //data: [
+    //{ y: '2006', a: 100, b: 90 },
+    //{ y: '2007', a: 75,  b: 65 },
+    //{ y: '2008', a: 50,  b: 40 },
+    //{ y: '2009', a: 75,  b: 65 },
+    //{ y: '2010', a: 50,  b: 40 },
+    //{ y: '2011', a: 75,  b: 65 },
+    //{ y: '2012', a: 100, b: 90 }
+    //],
+    data: data,
+    xkey: 'y',
+    ykeys: sections,
+    labels: sections
+  });
+
+}
