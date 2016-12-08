@@ -110,11 +110,11 @@ $(function () {
     $.get('../db/get_all_events.php', {
     }).done(function (events, status) {
         // [{type: type, date: date}, ...]
-        temp = new Date(events[0].date + " GMT-0400");
+        temp = new Date(events[events.length-1].date + " GMT-0400");
         events_arr = [];
         for (e in events) {
             events_arr.push({title: events[e].type, 
-                             start: new Date(events[e].date + " GMT-0400"),
+                             start: new Date(events[e].date + " GMT-0500"),
                              allDay: true,
                              className: 'fc-event-height-override'
                             });
