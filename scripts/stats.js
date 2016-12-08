@@ -96,7 +96,7 @@ $(function () {
 		$ratio_obj.section = absences[i].section;
 		if(excused && late){
 			$temp_obj.excused_late = absences[i].excused_late;
-			$ratio_obj.excused_late = (absences[i].excused_late)/(absences[i].members);
+			$ratio_obj.excused_late = Math.round((absences[i].excused_late)/(absences[i].members) * 100 ) / 100;
 			if( i == 0){
 				$bar_ykeys.push('excused_late');
 				$bar_labels.push('Excused - Late');
@@ -104,14 +104,14 @@ $(function () {
 			}
 		} if(excused && absent){
 			$temp_obj.excused_absent = absences[i].excused_absent;
-			$ratio_obj.excused_absent = (absences[i].excused_absent)/(absences[i].members);
+			$ratio_obj.excused_absent = Math.round((absences[i].excused_absent)/(absences[i].members) * 100 ) / 100;
 			if( i == 0){
 			$bar_ykeys.push('excused_absent');
 			$bar_labels.push('Excused - Absent');
 			$bar_colors.push('darkblue')}
 		} if(unexcused && late){
 			$temp_obj.unexcused_late = absences[i].unexcused_late;
-			$ratio_obj.unexcused_late = (absences[i].unexcused_late)/(absences[i].members);
+			$ratio_obj.unexcused_late = Math.round((absences[i].unexcused_late)/(absences[i].members) * 100 ) / 100;
 			if( i == 0){
 			$bar_ykeys.push('unexcused_late');
 			$bar_labels.push('Unexcused - Late');
@@ -119,7 +119,7 @@ $(function () {
 		}
 		if(unexcused && absent){
 			$temp_obj.unexcused_absent = absences[i].unexcused_absent;
-			$ratio_obj.unexcused_absent = (absences[i].unexcused_absent)/(absences[i].members);
+			$ratio_obj.unexcused_absent = Math.round((absences[i].unexcused_absent)/(absences[i].members) * 100 ) / 100;
 			if( i == 0){
 			$bar_ykeys.push('unexcused_absent');
 			$bar_labels.push('Unexcused - Absent');
