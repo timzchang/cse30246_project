@@ -29,15 +29,15 @@ if($result->num_rows != 0){
     $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
 
     if($result) {
-    	echo "Created new attendance issue.";
+    	echo "0";
     } else {
-        echo "Error - attendance issue not created.";
+        echo "1";
     }
 } else {
     # if there was no event on that date, return that information to the user
     $date = date_create_from_format('Y-m-d',$date);
     $date = $date->format('l, F d, Y');
-    echo "Error - no event on $date. Please try again.";
+    echo "2";
 }
 
 ?>

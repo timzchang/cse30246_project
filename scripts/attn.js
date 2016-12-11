@@ -15,6 +15,13 @@ function formatDate(date) {
     return new_date[2] + "-" + new_date[0] + "-" + new_date[1];
 }
 
+$("#closebtn").on('click', function (event) {
+    $('#error').slideUp();
+})
+$("#success-closebtn").on('click', function (event) {
+    $('#good').slideUp();
+})
+
 function submitForm () {
     var netid = $("#netid").val();
     var date = $("#form-date").val()
@@ -30,6 +37,18 @@ function submitForm () {
 	excused: excused 
     },
     function(data, status){
-	$("#attn_status").html(data);
+        if (data == "1") {
+            $('.alert-danger .msg').html("Error - attendance issue not created.");
+        } else if (data == "2") {
+            $('.alert-danger .msg').html("Error - no event on date");
+        }
+            
+        $('.alert-success .msg').html("Created new attendance issue.");
+        if (data == "0") {
+            $('.alert-success').slideDown();
+        } else {
+            $('.alert-danger').slideDown();
+        }
     });
 }
+
