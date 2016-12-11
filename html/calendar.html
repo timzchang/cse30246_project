@@ -71,8 +71,8 @@
 <section id="head" class="dark">
     <div class="col-lg-2"></div>
     <div class="container text-left">
-        <h1>Calendar</h1>
-        <h3>View, edit or delete attendance issues on a given day.</h3>
+        <h1><b>Calendar<b/></h1>
+        <h3>View, edit or delete attendance issues on a given day</h3>
     </div>
     <div class="col-lg-2"></div>
 <style>
@@ -150,6 +150,7 @@ margin-bottom:50px;
                             <option>Practice</option>
                             <option>Marchout</option>
                             <option>Game</option>
+                            <option>No event</option>
                         </select>
                       </div>
                     </div>
@@ -201,7 +202,7 @@ margin-bottom:50px;
 </div>
 <script>
     $(document).ready(function(){
-      $('.datepicker').datepicker();
+      $('.datepicker').datepicker({ format: 'yyyy-mm-dd' });
     })
 </script>
 <!-- ======= Modal ====== -->

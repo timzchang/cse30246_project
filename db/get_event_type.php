@@ -1,7 +1,7 @@
 <?php
 
 # get the information from the POST command
-$date = $_POST["date"]
+$date = $_GET["date"];
 
 # link to the database
 $link = mysqli_connect('localhost','csyers','trombone') or die('Could not connect: ' . mysql_error());

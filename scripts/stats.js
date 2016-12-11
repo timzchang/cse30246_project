@@ -48,7 +48,6 @@ $(function () {
       console.log("default event not prevented");
     } else {
       // everything looks good!
-      console.log("Something happened!");
       event.preventDefault();
       var s_date = $('#start-date').val();
       var  end_date = $('#end-date').val();
@@ -95,12 +94,14 @@ $(function () {
 		$temp_obj.section = absences[i].section;
 		$ratio_obj.section = absences[i].section;
 		if(excused && late){
+                                //console.log("color is #CF4A4B");
 			$temp_obj.excused_late = absences[i].excused_late;
 			$ratio_obj.excused_late = Math.round((absences[i].excused_late)/(absences[i].members) * 100 ) / 100;
 			if( i == 0){
 				$bar_ykeys.push('excused_late');
 				$bar_labels.push('Excused - Late');
-				$bar_colors.push('darkgreen');
+				//$bar_colors.push('darkgreen');
+				$bar_colors.push('#4CA84A');
 			}
 		} if(excused && absent){
 			$temp_obj.excused_absent = absences[i].excused_absent;
@@ -108,14 +109,16 @@ $(function () {
 			if( i == 0){
 			$bar_ykeys.push('excused_absent');
 			$bar_labels.push('Excused - Absent');
-			$bar_colors.push('darkblue')}
+			//$bar_colors.push('darkblue')}
+			$bar_colors.push('#185E9D')}
 		} if(unexcused && late){
 			$temp_obj.unexcused_late = absences[i].unexcused_late;
 			$ratio_obj.unexcused_late = Math.round((absences[i].unexcused_late)/(absences[i].members) * 100 ) / 100;
 			if( i == 0){
 			$bar_ykeys.push('unexcused_late');
 			$bar_labels.push('Unexcused - Late');
-			$bar_colors.push('darkred'); }
+			//$bar_colors.push('darkred'); }
+			$bar_colors.push('#C04E53'); }
 		}
 		if(unexcused && absent){
 			$temp_obj.unexcused_absent = absences[i].unexcused_absent;
@@ -123,7 +126,8 @@ $(function () {
 			if( i == 0){
 			$bar_ykeys.push('unexcused_absent');
 			$bar_labels.push('Unexcused - Absent');
-			$bar_colors.push('red');}
+			//$bar_colors.push('red');}
+			$bar_colors.push('#DCC445');}
 		}
 		$bar_count_data.push($temp_obj);
 		$bar_ratio_data.push($ratio_obj);

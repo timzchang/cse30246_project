@@ -17,11 +17,20 @@ $("#success-closebtn").on('click', function (event) {
     $('.alert-success').slideUp();
 })
 
-function formatDate(date) {
-    var new_date = date.split("-");
-    console.log(date);
-    return new_date[1] + "/" + new_date[2] + "/" + new_date[0];
-}
+$('#form-date').change(function () {
+    d = $('#form-date').val();
+    console.log(d);
+    $.get({
+        url: "../db/get_event_type.php",
+        data: {
+            date: d
+        }
+    }).done(function(type, status){
+        console.log(type);
+        $('#event-type').val(type);
+    });
+});
+
 
 function submitForm () {
     var netid = $("#netid").val();
@@ -62,7 +71,7 @@ function submitForm () {
     	    var absence_type = (attn[i].absence_type == 'A') ? "Absent" : "Late";
             $row = $('<tr id="row-' + i + '">'+
                 '<td>' + attn[i].netid + '</td>' +
-                '<td>' + formatDate(attn[i].date) + '</td>' +
+                '<td>' + attn[i].date + '</td>' +
                 '<td>' + attn[i].type + '</td>' +
                 '<td>' + absence_type + '</td>' +
                 '<td>' + excused + '</td>'+
@@ -79,7 +88,7 @@ function submitForm () {
                 var mem = $target.data();
 
                 $('#form-netid').val(mem.netid);
-                $('#form-date').val(formatDate(mem.date));
+                $('#form-date').val(mem.date);
                 $('#event-type').val(mem.type);
 
                 (mem.absence_type == 'A') ?
