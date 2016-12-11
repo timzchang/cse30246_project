@@ -72,18 +72,6 @@
             </a>
             <h2>Create Event</h2>
         </div>
-        <div class="col-sm-3 ">
-            <a href="#update-issue">
-            	<img src="../images/Lucas.jpg" class="img-responsive img-circle" >
-	    </a>
-            <h2>Update Issue</h2>
-        </div>
-        <div class="col-sm-3 ">
-            <a href="#del-issue">
-            	<img src="../images/Scary.jpg" class="img-responsive img-circle" >
-	    </a>
-            <h2>Delete Issue</h2>
-        </div>
     </div>
 </section>
 <!-- ======= Settings ====== -->
@@ -179,66 +167,6 @@
     })
 </script>
 <!-- ======= Create Event ====== -->
-
-<!-- ======= Update Issue  ====== -->
-<section id="supdate-issue">
-    <div class="container text-center">
-        <h1>Update Issue</h1>
-    </div>
-    <div class="container text-left">
-        <form id="update-issue">
-          <div class="form-group">
-            <label for="netid-update">netid:</label>
-            <input type="text" class="form-control" id="netid-update" placeholder="e.g. trees">
-          </div>
-          <div class="form-group">
-            <label for="eventid-update">eventid:</label>
-            <input type="number" class="form-control" id="eventid-update" placeholder="e.g. trees">
-          </div>
-          <div class="form-group">
-            <label for="absent_type-update">Late/Absent:</label>
-            <select class="form-control" id="absent_type-update" >
-		<option>select</option>
-                <option>L</option>
-                <option>A</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="excused-update">Excused?:</label>
-            <select class="form-control" id="excused-update">
-		<option>select</option>
-                <option>Y</option>
-                <option>N</option>
-            </select>
-          </div>
-	  <div id="update-status"></div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-    </div>
-</section>
-<!-- ======= Update Issue  ====== -->
-
-<!-- ======= Delete Issue  ====== -->
-<section id="sdel-issue">
-    <div class="container text-center">
-        <h1>Delete Issue</h1>
-    </div>
-    <div class="container text-left">
-        <form id="del-issue">
-          <div class="form-group">
-            <label for="netid-del">netid:</label>
-            <input type="text" class="form-control" id="netid-del" placeholder="e.g. trees">
-          </div>
-          <div class="form-group">
-            <label for="eventid-del">eventid:</label>
-            <input type="number" class="form-control" id="eventid-del" placeholder="e.g. 31">
-          </div>
-	  <div id="del-status"></div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-    </div>
-</section>
-<!-- ======= Delete Issue  ====== -->
 
 <script src="../scripts/settings.js"></script>
 </body>
