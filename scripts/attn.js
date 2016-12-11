@@ -40,7 +40,7 @@ function submitForm () {
         if (data == "1") {
             $('.alert-danger .msg').html("Error - attendance issue not created.");
         } else if (data == "2") {
-            $('.alert-danger .msg').html("Error - no event on date");
+            $('.alert-danger .msg').html("Error - no event on date.");
         }
             
         $('.alert-success .msg').html("Created new attendance issue.");
