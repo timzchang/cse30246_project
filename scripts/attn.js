@@ -37,10 +37,15 @@ function submitForm () {
 	excused: excused 
     },
     function(data, status){
+
+        console.log(data);
+        
         if (data == "1") {
             $('.alert-danger .msg').html("Error - attendance issue not created.");
         } else if (data == "2") {
-            $('.alert-danger .msg').html("Error - no event on date.");
+            $('.alert-danger .msg').html("Error - no event on selected date.");
+        } else if (data == "3") {
+            $('.alert-danger .msg').html("Error - attendance issue already exists for this studnet on this date.");
         }
             
         $('.alert-success .msg').html("Created new attendance issue.");
