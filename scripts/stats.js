@@ -60,6 +60,7 @@ $(function () {
       ($('input[name=all]:checked').length > 0) ?
         $('input[name=section]').each(function() { section_vals.push($(this).val());}) :
         $('input[name=section]:checked').each(function() { section_vals.push($(this).val());})
+	section_vals.sort()
       $.post("../db/get_number_of_issues_in_date_range.php", {
         start_date: s_date,
         end_date: end_date,
