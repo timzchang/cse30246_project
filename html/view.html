@@ -151,10 +151,11 @@
                     <div class="form-group">
                       <label for="event-type" class="col-lg-2 control-label">Event Type</label>
                       <div class="col-lg-10">
-                        <select class="form-control" id="event-type">
+                        <select disabled class="form-control" id="event-type">
                             <option>Practice</option>
                             <option>Marchout</option>
                             <option>Game</option>
+                            <option>No event</option>
                         </select>
                       </div>
                     </div>
@@ -206,7 +207,7 @@
 </div>
 <script>
     $(document).ready(function(){
-      $('.datepicker').datepicker();
+      $('.datepicker').datepicker({ format: 'yyyy-mm-dd' });
     })
 </script>
 <!-- ======= Modal ====== -->

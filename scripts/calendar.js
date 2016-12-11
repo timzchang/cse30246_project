@@ -20,7 +20,7 @@ function searchDate (date) {
 	            return;
     	}
         $('#table-title').html('');
-        $('#table-title').append('Issues for ' + attn[0].type + ' on ' + formatDate(attn[0].date));
+        $('#table-title').append('Issues for ' + attn[0].type + ' on ' + attn[0].date);
         $('#table-head').html('');
         $("#table-head").append(' <tr> <th>Last Name</th> <th>First Name</th> <th>netid</th> <th>Late/Absent</th> <th>Excused?</th> <th>Edit</th> </tr>')
 
@@ -48,7 +48,7 @@ function searchDate (date) {
                 var mem = $target.data();
 
                 $('#form-netid').val(mem.netid);
-                $('#form-date').val(formatDate(mem.date));
+                $('#form-date').val(mem.date);
                 $('#event-type').val(mem.type);
 
                 (mem.absence_type == 'A') ?
@@ -91,11 +91,6 @@ var month_to_num = {
 	Dec: "12"
 }
 
-function formatDate(date) {
-    var new_date = date.split("-");
-    return new_date[1] + "/" + new_date[2] + "/" + new_date[0];
-}
-
 function formatDateForReq (date) {
 	date = date.toString().split(" ");
 
@@ -105,6 +100,19 @@ function formatDateForReq (date) {
 
 	return year + "-" + month + "-" + day;
 }
+
+$('#form-date').change(function () {
+    d = $('#form-date').val();
+    $.get({
+        url: "../db/get_event_type.php",
+        data: {
+            date: d
+        }
+    }).done(function(type, status){
+        console.log(type);
+        $('#event-type').val(type);
+    });
+});
 
 $(function () {
     $.get('../db/get_all_events.php', {

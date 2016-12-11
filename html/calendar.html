@@ -150,6 +150,7 @@ margin-bottom:50px;
                             <option>Practice</option>
                             <option>Marchout</option>
                             <option>Game</option>
+                            <option>No event</option>
                         </select>
                       </div>
                     </div>
@@ -201,7 +202,7 @@ margin-bottom:50px;
 </div>
 <script>
     $(document).ready(function(){
-      $('.datepicker').datepicker();
+      $('.datepicker').datepicker({ format: 'yyyy-mm-dd' });
     })
 </script>
 <!-- ======= Modal ====== -->
