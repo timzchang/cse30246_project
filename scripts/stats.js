@@ -78,6 +78,7 @@ $(function () {
       $.post("../db/bar_info.php", {
         start_date: $('#start-date').val(),
         end_date: $('#end-date').val()
+
       }).done(function(absences, status){
         //barGraph(absences);
 	$('#bar-count').html('');
@@ -89,7 +90,10 @@ $(function () {
 	$bar_colors = [];
 	// Bar-ratio Variables
 	$bar_ratio_data = [];
+	var temp = [];
 	for( var i = 0; i < absences.length; i ++){
+	    for( var j in section_vals){
+		if( section_vals[j] == absences[i].section){
 		$temp_obj = {};
 		$ratio_obj = {};
 		$temp_obj.section = absences[i].section;
@@ -98,41 +102,45 @@ $(function () {
                                 //console.log("color is #CF4A4B");
 			$temp_obj.excused_late = absences[i].excused_late;
 			$ratio_obj.excused_late = Math.round((absences[i].excused_late)/(absences[i].members) * 100 ) / 100;
-			if( i == 0){
-				$bar_ykeys.push('excused_late');
-				$bar_labels.push('Excused - Late');
-				//$bar_colors.push('darkgreen');
-				$bar_colors.push('#4CA84A');
-			}
 		} if(excused && absent){
 			$temp_obj.excused_absent = absences[i].excused_absent;
 			$ratio_obj.excused_absent = Math.round((absences[i].excused_absent)/(absences[i].members) * 100 ) / 100;
-			if( i == 0){
-			$bar_ykeys.push('excused_absent');
-			$bar_labels.push('Excused - Absent');
-			//$bar_colors.push('darkblue')}
-			$bar_colors.push('#185E9D')}
 		} if(unexcused && late){
 			$temp_obj.unexcused_late = absences[i].unexcused_late;
 			$ratio_obj.unexcused_late = Math.round((absences[i].unexcused_late)/(absences[i].members) * 100 ) / 100;
-			if( i == 0){
-			$bar_ykeys.push('unexcused_late');
-			$bar_labels.push('Unexcused - Late');
-			//$bar_colors.push('darkred'); }
-			$bar_colors.push('#C04E53'); }
 		}
 		if(unexcused && absent){
 			$temp_obj.unexcused_absent = absences[i].unexcused_absent;
 			$ratio_obj.unexcused_absent = Math.round((absences[i].unexcused_absent)/(absences[i].members) * 100 ) / 100;
-			if( i == 0){
-			$bar_ykeys.push('unexcused_absent');
-			$bar_labels.push('Unexcused - Absent');
-			//$bar_colors.push('red');}
-			$bar_colors.push('#DCC445');}
 		}
 		$bar_count_data.push($temp_obj);
 		$bar_ratio_data.push($ratio_obj);
+		}
+	    }
 	}
+			if(excused && late){
+				$bar_ykeys.push('excused_late');
+				$bar_labels.push('Excused - Late');
+				//$bar_colors.push('darkgreen');
+				$bar_colors.push('#4CA84A');
+		} if(excused && absent){
+			$bar_ykeys.push('excused_absent');
+			$bar_labels.push('Excused - Absent');
+			//$bar_colors.push('darkblue')}
+			$bar_colors.push('#185E9D');
+		} if(unexcused && late){
+			$bar_ykeys.push('unexcused_late');
+			$bar_labels.push('Unexcused - Late');
+			//$bar_colors.push('darkred'); }
+			$bar_colors.push('#C04E53'); 
+		}
+		if(unexcused && absent){
+			$bar_ykeys.push('unexcused_absent');
+			$bar_labels.push('Unexcused - Absent');
+			//$bar_colors.push('red');}
+			$bar_colors.push('#DCC445');
+		}
+
 	 Morris.Bar({
   		  element: 'bar-count',
   		  data: $bar_count_data,
