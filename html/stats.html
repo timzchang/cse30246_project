@@ -58,10 +58,10 @@
             <div class="collapse navbar-collapse" id="myNav">
                 <ul class="nav navbar-nav">
                     <li><a href="attn.html">REQUESTS</a></li>
-                    <li><a href="#">CALENDAR</a></li>
+                    <li><a href="calendar.html">CALENDAR</a></li>
                     <li><a href="view.html">SEARCH</a></li>
                     <li class="active"><a href="#">STATISTICS</a></li>
-                    <li><a href="#">WARMUP BLOCK</a></li>
+                    <li><a href="block.html">WARMUP BLOCK</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a class="navbar-brand" href="settings.html"><span class="glyphicon glyphicon-cog"></span></a></li>
@@ -76,7 +76,8 @@
 <section id="head" class="dark">
     <div class="col-xs-2"></div>
     <div class="container text-left">
-        <h1>Attendance Statistics</h1>
+        <h1><b>Attendance Statistics</b></h1>
+        <h3>Graph and compare attendance records per section, over time</h3>
     </div>
     <div class="col-xs-2"></div>
 </section>
@@ -86,7 +87,8 @@
 <!-- ======= Overall Form ====== -->
 <section >
 
-<div class="col-xs-12 text-left">
+<!--<div class="col-xs-12 text-left">-->
+<div class="container text-left">
     <form class="form-inline"role="form" id="graph-form">
         <div>
         <div>
@@ -148,15 +150,16 @@
 <div><h3></h3></div>
 <!-- ======= Grabph ====== -->
 <section>
+<!--<div class="col-xs-1"></div>-->
 <div class="container-fluid text-left">
 <h2> Number of Issues by Date: </h2></div>
 <div id="attn-over-time"></div>
+<div class="container-fluid text-left">
 <h2> Number of Issues: </h2></div>
 <div id="bar-count"></div>
 <div class="container-fluid text-left">
 <h2> Issue Ratio: </h2></div>
 <div id="bar-ratio"></div>
-<div class="container-fluid text-left">
 </section>
 <!-- ======= Grabph ====== -->
 

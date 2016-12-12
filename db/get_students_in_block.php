@@ -1,8 +1,8 @@
 <?php
 
 # get information from POST command
-$block = $_POST["block"];
-$date = $_POST["date"];
+$block = $_GET["block"];
+$date = $_GET["date"];
 
 # link to dsg
 $link = mysqli_connect('localhost','csyers','trombone') or die('Could not connect: ' . mysql_error());

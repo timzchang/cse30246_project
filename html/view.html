@@ -49,7 +49,7 @@
                     <li><a href="calendar.html">CALENDAR</a></li>
                     <li class="active"><a href="#">SEARCH</a></li>
                     <li><a href="stats.html">STATISTICS</a></li>
-                    <li><a href="#">WARMUP BLOCK</a></li>
+                    <li><a href="block.html">WARMUP BLOCK</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a class="navbar-brand" href="settings.html"><span class="glyphicon glyphicon-cog"></span></a></li>
@@ -62,14 +62,9 @@
 
 <!-- ======= Header ====== -->
 <section id="head" class="dark">
-    <div class="container text-center">
-        <!-- <div class="col-sm-3"> -->
-            <img src="../images/band_logo.png">
-        <!-- </div> -->
-        <!-- <div class="col-sm-9 text-left vcenter"> -->
-            <!-- <div style="height:10em;border:1px solid #000">Attendance Request Form</div> -->
-            <h1>Attendance Issue View</h1>
-        <!-- </div> -->
+    <div class="container text-left">
+        <h1><b>Search</b></h1>
+        <h3>View, edit or delete attendance issue by netid</h3>
     </div>
 </section>
 <!-- ======= Header ====== -->
@@ -104,7 +99,7 @@
 <section id="table">
 <div class="container text-left">
 <div id="resp_table">
-<table class="table table-bordered">
+<table class="table table-hover table-bordered ">
     <thead>
       <tr>
         <th>netid</th>
@@ -124,7 +119,7 @@
 <!-- ======= Table ====== -->
 
 <!-- ======= Modal ====== -->
-<div id="edit-issue-modal" class="modal fade" role="dialog">
+<div id="edit-issue-modal" class="modal fade" role="dialog" tabindex=-1>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
@@ -151,10 +146,11 @@
                     <div class="form-group">
                       <label for="event-type" class="col-lg-2 control-label">Event Type</label>
                       <div class="col-lg-10">
-                        <select class="form-control" id="event-type">
+                        <select disabled class="form-control" id="event-type">
                             <option>Practice</option>
                             <option>Marchout</option>
                             <option>Game</option>
+                            <option>No event</option>
                         </select>
                       </div>
                     </div>
@@ -194,7 +190,7 @@
                     </div>
                     <div class="form-group">
                       <div class="col-lg-10 col-lg-offset-2">
-                        <button type="reset" class="btn btn-default" data-dismiss="modal">cancel</button>
+                        <button type="reset" id="edit-issue-cancel" class="btn btn-default" >cancel</button>
                         <button id="edit-issue-submit" type="submit" class="btn btn-primary" >submit</button>
                       </div>
                     </div>
@@ -206,13 +202,13 @@
 </div>
 <script>
     $(document).ready(function(){
-      $('.datepicker').datepicker();
+      $('.datepicker').datepicker({ format: 'yyyy-mm-dd' });
     })
 </script>
 <!-- ======= Modal ====== -->
 
 <!-- ======= Del Modal ====== -->
-<div id="del-issue-modal" class="modal fade" role="dialog">
+<div id="del-issue-modal" class="modal fade" role="dialog" tabindex=-1>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -220,7 +216,7 @@
                 <h4 class="modal-title">Delete Issue</h4>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete? This cannot be undone</p>
+                <p>Are you sure you want to delete? This cannot be undone.</p>
             </div>
             <div class="modal-footer">
                  <div class="col-lg-10 col-lg-offset-2">

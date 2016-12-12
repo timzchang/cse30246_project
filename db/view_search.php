@@ -14,7 +14,7 @@ $link = mysqli_connect('localhost','csyers','trombone') or die('Could not connec
 mysqli_select_db($link,'databse') or die('Could not select databse');
 
 # check if there is a student in the DB with that student's nnetid
-$test = "SELECT * FROM students WHERE netid LIKE \"$netid\";";
+$test = "SELECT * FROM students WHERE netid = \"$netid\";";
 $test_result = mysqli_query($link,$test) or die('Test failed: ' . mysql_error());
 
 # return error if no students are in the list

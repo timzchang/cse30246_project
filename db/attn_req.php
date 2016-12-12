@@ -24,20 +24,33 @@ if($result->num_rows != 0){
     $row = $result->fetch_row();
     $eventid = $row[0];
 
+    $sql = "SELECT count(*) as t FROM attendance_issues WHERE netid = \"$netid\" AND eventid = $eventid;";
+
+    $result = mysqli_query($link,$sql);
+    if($result){
+        $row = $result->fetch_row();
+        if($row[0] != 0) {
+	    echo "3";
+	    return;
+	}
+    } else {
+        echo "1";
+        return;
+    }
+
     $sql = "INSERT INTO attendance_issues VALUES (\"$netid\",$eventid,\"$absence_type\",\"$excused\");";
 
-    $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
-
+    $result = mysqli_query($link,$sql);
     if($result) {
-    	echo "Created new attendance issue.";
+    	echo "0";
     } else {
-        echo "Error: attendance issue not created.";
+        echo "1";
     }
 } else {
     # if there was no event on that date, return that information to the user
     $date = date_create_from_format('Y-m-d',$date);
     $date = $date->format('l, F d, Y');
-    echo "There is no $event_type event on $date.";
+    echo "2";
 }
 
 ?>

@@ -97,7 +97,7 @@ ON 			G.section = H.section) I ORDER BY total) J
 LEFT JOIN
 (
 SELECT section, COUNT(*) as members FROM students GROUP BY section
-) K ON J.section = K.section;";
+) K ON J.section = K.section ORDER BY section;";
 
 # get the result of the query
 $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
