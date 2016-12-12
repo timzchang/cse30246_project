@@ -100,7 +100,7 @@ $(function () {
 			if( i == 0){
 				$bar_ykeys.push('excused_late');
 				$bar_labels.push('Excused - Late');
-				$bar_colors.push('darkgreen');
+				$bar_colors.push('navy');
 			}
 		} if(excused && absent){
 			$temp_obj.excused_absent = absences[i].excused_absent;
