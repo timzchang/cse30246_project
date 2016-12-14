@@ -83,6 +83,14 @@ console.log($('#block_id').val());
 
 }
 
+$('#block_id').change(function() {
+    d = new Date();
+    t = d.toString().split(" ");
+    t = t[0] + ", " + t[1] + " " + t[2];
+    d = formatDateForReq(d.toString());
+    
+    submitForm(d);
+});
 
 $(function () {
     d = new Date();
@@ -103,7 +111,7 @@ $("#attn_req").validator().on("submit", function (event) {
         submitForm(d);
     }
 });
-    $('#to_top').on('click', function (event) {
+    $('#dto_top').on('click', function (event) {
         if (event.isDefaultPrevented()) {
             // handle the invalid form...
             console.log("default event not prevented");
