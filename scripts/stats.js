@@ -130,8 +130,8 @@ $(function () {
 			temp_obj.unexcused_absent = absences[i].unexcused_absent;
 			ratio_obj.unexcused_absent = Math.round((absences[i].unexcused_absent)/(absences[i].members) * 100 ) / 100;
 		}
-		bar_count_data.push($temp_obj);
-		bar_ratio_data.push($ratio_obj);
+		bar_count_data.push(temp_obj);
+		bar_ratio_data.push(ratio_obj);
 		}
 	    }
 	}
