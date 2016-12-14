@@ -144,7 +144,7 @@ $(function () {
                 event_type: event_type,
                 absence_type: absence_type,
                 excused: excused,
-                old_eventid: $('#event-id').data()
+                old_eventid: $('#event-id').data('eventid')
             }).done(function(resp) {
 		console.log($('#form-date').val());
                 console.log(resp);
