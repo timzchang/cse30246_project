@@ -32,15 +32,27 @@ if($result->num_rows != 0){
 
     # if result was success, tell front end
     if($result){
-	    echo "Update successful.";
+        $response = array();
+	array_push($response,"0");
+	array_push($response,"Update successful.");
     } else {
-	    echo "Update failed.";
+        $response = array();
+	array_push($response,"1");
+	array_push($response,"Update failed.");
     }
+   
+    header('content-type: application/json');
+    echo json_encode($response);
+
 } else {
     # if there was no event on that date, return that information to the user
     $date = date_create_from_format('Y-m-d',$date);
     $date = $date->format('l, F d, Y');
-    echo "There is no $event_type event on $date.";
+    $response = array();
+    array_push($response,"2");
+    array_push($response,"There is no event on $date.");
+    header('content-type: application/json');
+    echo json_encode($response);
 }
 
 ?>
