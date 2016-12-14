@@ -91,6 +91,7 @@ function submitForm () {
                 $('#form-netid').val(mem.netid);
                 $('#form-date').val(mem.date);
                 $('#event-type').val(mem.type);
+                $('#event-id').data('eventid', mem.eventid);
 
                 (mem.absence_type == 'A') ?
                 $('input[name=type][value=absent]').prop('checked', true) :
@@ -119,12 +120,7 @@ function submitForm () {
 
 $(function () {
     $('#edit-issue-submit').on('click', function(event) {
-        $('#edit-issue-form').submit();
-    });
-    $('#edit-issue-cancel').on('click', function(event) {
-        $('#edit-issue-modal').modal('hide');
-    });
-    $('#edit-issue-form').on('submit', function(event) {
+        $('#edit-issue-form').unbind('submit').bind('submit', function(event) {
         if (event.isDefaultPrevented()) {
             // handle the invalid form...
             console.log("default event not prevented");
@@ -147,7 +143,8 @@ $(function () {
                 date: $('#form-date').val(),
                 event_type: event_type,
                 absence_type: absence_type,
-                excused: excused
+                excused: excused,
+                old_eventid: $('#event-id').data()
             }).done(function(resp) {
                 console.log(resp);
                 if(Array.isArray(resp)) {
@@ -159,11 +156,14 @@ $(function () {
                         $('.edit-msg').html(resp[1]);
                     }
                 }
-                console.log(resp);
             }).fail(function(err) {
                 console.log(err);
             });
         }
+        });
+    });
+    $('#edit-issue-cancel').on('click', function(event) {
+        $('#edit-issue-modal').modal('hide');
     });
     $('#del-issue-submit').on('click', function (event) {
         if (event.isDefaultPrevented()) {
