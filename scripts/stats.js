@@ -26,6 +26,23 @@ var lin = Morris.Line({
   ykeys: ['a'],
   labels: ['Band']
 });
+	 Morris.Bar({
+  		  element: 'bar-count',
+  		  data: [{section: '2016', Band: 0}],
+		  xkey: 'section',
+		  ykeys: ['Band'],
+		  labels: ['Band'],
+		  stacked: 'true'
+		});
+
+      Morris.Bar({
+  		  element: 'bar-ratio',
+  		  data: [{section: '2016', Band: 0}],
+		  xkey: 'section',
+		  ykeys: ['Band'],
+		  labels: ['Band'],
+		  stacked: 'true'
+		});
 
 $(function () {
   $('#graph-form-submit').on('click', function (event) {
@@ -84,81 +101,81 @@ $(function () {
 	$('#bar-count').html('');
 	$('#bar-ratio').html('');
 	// Bar-count Variables
-	$bar_count_data = [];
-	$bar_ykeys = [];
-	$bar_labels = [];
-	$bar_colors = [];
+	bar_count_data = [];
+	bar_ykeys = [];
+	bar_labels = [];
+	bar_colors = [];
 	// Bar-ratio Variables
-	$bar_ratio_data = [];
+	bar_ratio_data = [];
 	var temp = [];
 	for( var i = 0; i < absences.length; i ++){
 	    for( var j in section_vals){
 		if( section_vals[j] == absences[i].section){
-		$temp_obj = {};
-		$ratio_obj = {};
-		$temp_obj.section = absences[i].section;
-		$ratio_obj.section = absences[i].section;
+		temp_obj = {};
+		ratio_obj = {};
+		temp_obj.section = absences[i].section;
+		ratio_obj.section = absences[i].section;
 		if(excused && late){
                                 //console.log("color is #CF4A4B");
-			$temp_obj.excused_late = absences[i].excused_late;
-			$ratio_obj.excused_late = Math.round((absences[i].excused_late)/(absences[i].members) * 100 ) / 100;
+			temp_obj.excused_late = absences[i].excused_late;
+			ratio_obj.excused_late = Math.round((absences[i].excused_late)/(absences[i].members) * 100 ) / 100;
 		} if(excused && absent){
-			$temp_obj.excused_absent = absences[i].excused_absent;
-			$ratio_obj.excused_absent = Math.round((absences[i].excused_absent)/(absences[i].members) * 100 ) / 100;
+			temp_obj.excused_absent = absences[i].excused_absent;
+			ratio_obj.excused_absent = Math.round((absences[i].excused_absent)/(absences[i].members) * 100 ) / 100;
 		} if(unexcused && late){
-			$temp_obj.unexcused_late = absences[i].unexcused_late;
-			$ratio_obj.unexcused_late = Math.round((absences[i].unexcused_late)/(absences[i].members) * 100 ) / 100;
+			temp_obj.unexcused_late = absences[i].unexcused_late;
+			ratio_obj.unexcused_late = Math.round((absences[i].unexcused_late)/(absences[i].members) * 100 ) / 100;
 		}
 		if(unexcused && absent){
-			$temp_obj.unexcused_absent = absences[i].unexcused_absent;
-			$ratio_obj.unexcused_absent = Math.round((absences[i].unexcused_absent)/(absences[i].members) * 100 ) / 100;
+			temp_obj.unexcused_absent = absences[i].unexcused_absent;
+			ratio_obj.unexcused_absent = Math.round((absences[i].unexcused_absent)/(absences[i].members) * 100 ) / 100;
 		}
-		$bar_count_data.push($temp_obj);
-		$bar_ratio_data.push($ratio_obj);
+		bar_count_data.push($temp_obj);
+		bar_ratio_data.push($ratio_obj);
 		}
 	    }
 	}
 			if(excused && late){
-				$bar_ykeys.push('excused_late');
-				$bar_labels.push('Excused - Late');
+				bar_ykeys.push('excused_late');
+				bar_labels.push('Excused - Late');
 				//$bar_colors.push('darkgreen');
-				$bar_colors.push('#4CA84A');
+				bar_colors.push('#4CA84A');
 		} if(excused && absent){
-			$bar_ykeys.push('excused_absent');
-			$bar_labels.push('Excused - Absent');
+			bar_ykeys.push('excused_absent');
+			bar_labels.push('Excused - Absent');
 			//$bar_colors.push('darkblue')}
-			$bar_colors.push('#185E9D');
+			bar_colors.push('#185E9D');
 		} if(unexcused && late){
-			$bar_ykeys.push('unexcused_late');
-			$bar_labels.push('Unexcused - Late');
+			bar_ykeys.push('unexcused_late');
+			bar_labels.push('Unexcused - Late');
 			//$bar_colors.push('darkred'); }
-			$bar_colors.push('#C04E53'); 
+			bar_colors.push('#C04E53'); 
 		}
 		if(unexcused && absent){
-			$bar_ykeys.push('unexcused_absent');
-			$bar_labels.push('Unexcused - Absent');
+			bar_ykeys.push('unexcused_absent');
+			bar_labels.push('Unexcused - Absent');
 			//$bar_colors.push('red');}
-			$bar_colors.push('#DCC445');
+			bar_colors.push('#DCC445');
 		}
 
 	 Morris.Bar({
   		  element: 'bar-count',
-  		  data: $bar_count_data,
+  		  data: bar_count_data,
 		  xkey: 'section',
-		  ykeys: $bar_ykeys,
-		  labels: $bar_labels,
+		  ykeys: bar_ykeys,
+		  labels: bar_labels,
 		  stacked: 'true',
-		  barColors: $bar_colors
+		  barColors: bar_colors
 		});
 
       Morris.Bar({
   		  element: 'bar-ratio',
-  		  data: $bar_ratio_data,
+  		  data: bar_ratio_data,
 		  xkey: 'section',
-		  ykeys: $bar_ykeys,
-		  labels: $bar_labels,
+		  ykeys: bar_ykeys,
+		  labels: bar_labels,
 		  stacked: 'true',
-		  barColors: $bar_colors
+		  barColors: bar_colors
 		});
 
 
