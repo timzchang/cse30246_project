@@ -4,7 +4,7 @@ $lname = $_POST["lname"];
 $fname = $_POST["fname"];
 $section = $_POST["section"];
 $netid = $_POST["netid"];
-$yog = $_POST["yog"]
+$yog = $_POST["yog"];
 $school = $_POST["school"];
 $block = $_POST["block"];
 
@@ -19,7 +19,6 @@ $sql = "SELECT * FROM students WHERE netid = '$netid';";
 
 # run the SQL query and store the result
 $result = mysqli_query($link,$sql) or die('Query failed" ' . mysql_error());
-
 # if there was an event that mathed the information
 if($result->num_rows == 0){
     # SQL query to run the update
@@ -33,7 +32,16 @@ if($result->num_rows == 0){
     } else if ($yog == "Senior"){
         $yog = $year + 1;
     }
-    $sql = "INSERT INTO TABLE students VALUES (\"$lname\",\"$fname\",\"$section\",\"$netid\",$yog,\"$school\",\"$block\");";
+    $section = substr($section,5);
+ /*   echo $lname;
+    echo $fname;
+    echo $section;
+    echo $netid;
+    echo $yog;
+    echo $school;
+    echo $block;
+*/
+    $sql = "INSERT INTO students VALUES (\"$lname\",\"$fname\",\"$section\",\"$netid\",$yog,\"$school\",\"$block\");";
 
     # get the result of the update
     $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());

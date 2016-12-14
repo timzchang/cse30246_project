@@ -26,11 +26,11 @@ function createStudent() {
     {
         lname: $('#last_name').val(),
         fname: $('#first_name').val(),
-        section: $('section').val(),
-        netid: $('netid').val(),
-        yog: $('year').val(),
-        school: $('school').val(),
-        block: $('block').val()
+        section: $('#section').val(),
+        netid: $('#netid').val(),
+        yog: $('#year').val(),
+        school: $('#school').val(),
+        block: $('#block').val()
     }).done(function (resp) {
         if(Array.isArray(resp)) {
             alert(resp[1]);
