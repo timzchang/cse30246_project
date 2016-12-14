@@ -50,6 +50,7 @@ function searchDate (date) {
                 $('#form-netid').val(mem.netid);
                 $('#form-date').val(mem.date);
                 $('#event-type').val(mem.type);
+                $('#event-id').data('eventid', mem.eventid);
 
                 (mem.absence_type == 'A') ?
                 $('input[name=type][value=absent]').prop('checked', true) :
@@ -176,12 +177,18 @@ $(function () {
                 date: date,
                 event_type: event_type,
                 absence_type: absence_type,
-                excused: excused
+                excused: excused,
+                old_eventid: $('#event-id').data('eventid')
             }).done(function(resp) {
                 console.log(resp);
-                $('#edit-issue-modal').modal('hide');
-                searchDate($('#date').data().date);
-                console.log($('#date').data().date);
+                if(Array.isArray(resp)) {
+                    if(resp[0] == "0") {
+                        $('#edit-issue-modal').modal('hide');
+                        searchDate($('#date').data().date);
+                    } else {
+                        $('.edit-msg').html(resp[1]);
+                    }
+                }
             }).fail(function(err) {
                 console.log(err);
             });
