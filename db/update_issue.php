@@ -47,7 +47,7 @@ if($result->num_rows != 0){
 } else {
     # if there was no event on that date, return that information to the user
     $date = date_create_from_format('Y-m-d',$date);
-    $date = $date->format('l, F d, Y');
+    $date = $date->format('l, F, d, Y');
     $response = array();
     array_push($response,"2");
     array_push($response,"There is no event on $date.");

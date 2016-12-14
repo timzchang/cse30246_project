@@ -86,6 +86,7 @@ function submitForm () {
             $row.find('.edit').on('click', function (event) {
                 var $target = $(event.delegateTarget);
                 var mem = $target.data();
+                $('#edit-msg').html('');
 
                 $('#form-netid').val(mem.netid);
                 $('#form-date').val(mem.date);
@@ -150,17 +151,19 @@ $(function () {
                 absence_type: absence_type,
                 excused: excused
             }).done(function(resp) {
-                console.log('update success');
-                $('#edit-issue-modal').modal('hide');
+                if(Array.isArray(resp)) {
+                    if(resp[0] == "0") {
+                        $('#edit-issue-modal').modal('hide');
+                        $('#edit-issue-modal').modal('hide');
+                        submitForm();
+                    } else {
+                        $('#edit-msg').html(resp);
+                    }
+                }
                 console.log(resp);
-                r = 1;
-                $('#edit-issue-modal').modal('hide');
-                submitForm();
             }).fail(function(err) {
                 console.log(err);
             });
-            if (r==1) {
-            }
         }
     });
     $('#del-issue-submit').on('click', function (event) {
@@ -184,6 +187,11 @@ $(function () {
                 date: mem.date
             }).done(function(resp) {
                 submitForm();
+                if(Array.isArray(resp)) {
+                    if(resp[0] != "0") {
+                        alert(resp[1]);
+                    }
+                }
                 console.log(resp);
             }).fail(function(resp) {
                 console.log(resp);
