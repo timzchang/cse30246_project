@@ -40,10 +40,18 @@ if($result->num_rows == 0){
 
     # if result was success, tell front end
     if($result){
-	    echo "Update successful.";
+	    $response = array();
+	    array_push($response,"0");
+	    array_push($response,"Update successful.");
     } else {
-	    echo "Update failed.";
+	    $response = array();
+	    array_push($response,"1");
+	    array_push($response,"Update failed.");
     }
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+
 } else {
     # if there was no event on that date, return that information to the user
     $response = array();
