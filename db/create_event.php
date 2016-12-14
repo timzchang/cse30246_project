@@ -35,13 +35,12 @@ if($result->num_rows != 0){
 
     $date = date_create_from_format('Y-m-d',$date);
     $date_string = $date->format('Y-m-d');
-    $sql = "SELECT * FROM events where date = $date_string;";
+    $sql = "SELECT * FROM events where date = \"$date_string\";";
     
     $result = mysqli_query($link,$sql) or die('query failed: ' . mysql_error());
     if($result->num_rows == 0){
 
-        $sql = "INSERT INTO TABLE events VALUES ($eventid,\"$event_type\",$date,$start_time,$end_time);";
-
+        $sql = "INSERT INTO events VALUES ($eventid,\"$event_type\",\"$date_string\",\"$start_time\",\"$end_time\");";
         # get the result of the update
         $result = mysqli_query($link,$sql) or die('query failed: ' . mysql_error());
 
@@ -63,7 +62,7 @@ if($result->num_rows != 0){
         $response = array();
 	array_push($response,"3");
         $date_string = $date->format('l, F d, Y');
-        array_push($response,"There is already an event on $date.");
+        array_push($response,"There is already an event on $date_string.");
  
         header('content-type: application/json');
         echo json_encode($response);
