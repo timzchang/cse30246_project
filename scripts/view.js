@@ -19,7 +19,6 @@ $("#success-closebtn").on('click', function (event) {
 
 $('#form-date').change(function () {
     d = $('#form-date').val();
-    console.log(d);
     $.get({
         url: "../db/get_event_type.php",
         data: {
@@ -59,6 +58,7 @@ function submitForm () {
             console.log(attn);
             return;
     	}
+        console.log(attn[0].date);
         $('.alert-danger').slideUp();
         if (attn.length != 0) {
             $('.alert-success').slideUp();
@@ -86,7 +86,7 @@ function submitForm () {
             $row.find('.edit').on('click', function (event) {
                 var $target = $(event.delegateTarget);
                 var mem = $target.data();
-                $('#edit-msg').html('');
+                $('.edit-msg').html('');
 
                 $('#form-netid').val(mem.netid);
                 $('#form-date').val(mem.date);
@@ -133,8 +133,6 @@ $(function () {
             event.preventDefault();
             var r = 0;
             var netid = $("#form-netid").val();
-            var old_date = $("#form-date").val().split("/");
-            var date = old_date[2] + "-" + old_date[0] + "-" + old_date[1];
             var event_type = $('#event-type option:selected').val();
             var absence_type = ($("input[name=type]:checked").val() == "absent") ? 'A' : 'L';
             var excused = ($("input[name=excused]:checked").val() == "yes") ? 'Y' : 'N';
@@ -146,18 +144,19 @@ $(function () {
             $.post("../db/update_issue.php",
             {
                 netid: netid,
-                date: date,
+                date: $('#form-date').val(),
                 event_type: event_type,
                 absence_type: absence_type,
                 excused: excused
             }).done(function(resp) {
+                console.log(resp);
                 if(Array.isArray(resp)) {
                     if(resp[0] == "0") {
                         $('#edit-issue-modal').modal('hide');
                         $('#edit-issue-modal').modal('hide');
                         submitForm();
                     } else {
-                        $('#edit-msg').html(resp);
+                        $('.edit-msg').html(resp[1]);
                     }
                 }
                 console.log(resp);
