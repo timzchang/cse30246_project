@@ -146,6 +146,7 @@ $(function () {
                 excused: excused,
                 old_eventid: $('#event-id').data()
             }).done(function(resp) {
+		console.log($('#form-date').val());
                 console.log(resp);
                 if(Array.isArray(resp)) {
                     if(resp[0] == "0") {
