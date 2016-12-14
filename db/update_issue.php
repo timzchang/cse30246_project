@@ -5,6 +5,7 @@ $date = $_POST["date"];
 $event_type = $_POST["event_type"];
 $absence_type = $_POST["absence_type"];
 $excused = $_POST["excused"];
+$old_eventid = $_POST["old_eventid"];
 
 # link to the database
 $link = mysqli_connect('localhost','csyers','trombone') or die('Could not connect: ' . mysql_error());
@@ -25,7 +26,7 @@ if($result->num_rows != 0){
     # get the event ID from the row
     $eventid = $row[0];
     # SQL query to run the update
-    $sql = "UPDATE attendance_issues SET attendance_issues.absence_type = '$absence_type', attendance_issues.excused = '$excused' WHERE attendance_issues.netid = \"$netid\" AND attendance_issues.eventid = $eventid;";
+    $sql = "UPDATE attendance_issues SET attendance_issues.absence_type = '$absence_type', attendance_issues.excused = '$excused', attendance_issues.eventid = '$eventid' WHERE attendance_issues.netid = \"$netid\" AND attendance_issues.eventid = $old_eventid;";
 
     # get the result of the update
     $result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
@@ -46,8 +47,8 @@ if($result->num_rows != 0){
 
 } else {
     # if there was no event on that date, return that information to the user
-    $date = date_create_from_format('Y-m-d',$date);
-    $date = $date->format('l, F, d, Y');
+    //$date = date_create_from_format('Y-m-d',$date);
+    //$date = $date->format('l, F, d, Y');
     $response = array();
     array_push($response,"2");
     array_push($response,"There is no event on $date.");
