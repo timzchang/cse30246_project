@@ -112,6 +112,7 @@ $("#student-table tbody").html('');
                 $('#block').val(mem.block);
                 $('#year').val(mem.yog);
                 $('#school').val(mem.school);
+                $('#net-id').data('netid', mem.netid);
                 //$('#event-id').data('eventid', mem.eventid);
             });
 
@@ -222,9 +223,9 @@ $(function () {
                 section: $("#section").val(),
                 block: $("#block").val(),
                 yog: $("#year").val(),
-                school: $("#school").val()
+                school: $("#school").val(),
                 // event_type: event_type,
-                // old_eventid: $('#event-id').data('eventid')
+                old_netid: $('#net-id').data('netid')
             }).done(function(resp) {
                 console.log(resp);
                 if(Array.isArray(resp)) {
