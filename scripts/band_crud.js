@@ -65,10 +65,11 @@ function searchStudent () {
                 $('#student-error').slideDown();
                 $('#student-good').slideUp();
                 attn = [];
-            };
+            } else {
             console.log("not array");
             console.log(attn);
             return;
+            }
     	}
         console.log(attn[0].date);
         $('#student-error').slideUp();
@@ -144,10 +145,11 @@ function searchEvent() {
                 $('#event-error').slideDown();
                 $('#event-good').slideUp();
                 attn = [];
-            };
+            } else {
             console.log("not array");
             console.log(attn);
             return;
+            }
         }
         console.log(attn[0].date);
         $('#event-error').slideUp();
