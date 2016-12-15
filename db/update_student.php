@@ -31,8 +31,6 @@ $sql = "UPDATE students SET fname = \"$fname\", lname = \"$lname\", section = \"
 # run the SQL query and store the result
 $result = mysqli_query($link,$sql) or die('Query failed" ' . mysql_error());
 
-$sql = "
-
 if($result){
     $response = array();
     array_push($response,"0");
