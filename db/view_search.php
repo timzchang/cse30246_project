@@ -24,7 +24,7 @@ if (!$test_result || mysqli_num_rows($test_result) == 0) {
 }
 
 # sql query to get all issues for this student
-$sql = "select * from attendance_issues a, events e where a.eventid=e.eventid and a.netid = \"%$netid%\";";
+$sql = "select * from attendance_issues a, events e where a.eventid=e.eventid and a.netid = \"$netid\";";
 
 # get the result of the query
 $result = mysqli_query($link,$sql) or die('query failed: ' . mysql_error());
