@@ -73,7 +73,7 @@ $("#student-table tbody").html('');
             return;
             }
     	}
-        console.log(attn[0].date);
+        console.log(attn[0].netid);
         $('#student-error').slideUp();
         if (attn.length != 0) {
             $('#student-good').slideUp();
@@ -269,7 +269,7 @@ $(function () {
                     if(resp[0] != "0") {
                         alert(resp[1]);
                     } else {
-                        $('#student-good .msg').html('Delete success');
+                        $('#student-good .msg').html(resp[1]);
                         $('#student-good').slideDown();
                         $("#student-table tbody").html('');
                     }
@@ -340,7 +340,7 @@ $(function () {
                     if(resp[0] != "0") {
                         alert(resp[1]);
                     } else {
-                        $('#event-good .msg').html('Delete success');
+                        $('#event-good .msg').html(resp[1]);
                         $('#event-good').slideDown();
                         $("#event-table tbody").html('');
                     }
