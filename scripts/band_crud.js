@@ -146,7 +146,6 @@ function searchEvent() {
                 $('#event-error .msg').html('No event on this date.');
                 $('#event-error').slideDown();
                 $('#event-good').slideUp();
-
                 attn = [];
             } else {
                 console.log("not array");
@@ -232,6 +231,7 @@ $(function () {
                     if(resp[0] == "0") {
                         $('#edit-student-modal').modal('hide');
                         $('#edit-student-modal').modal('hide');
+                        $('#netid').val($('#form-netid').val());
                         searchStudent();
                     } else {
                         $('.edit-msg').html(resp[1]);
@@ -302,6 +302,7 @@ $(function () {
                     if(resp[0] == "0") {
                         $('#edit-event-modal').modal('hide');
                         $('#edit-event-modal').modal('hide');
+                        $('#date').val($('#form-date').val());
                         searchEvent();
                     } else {
                         $('.edit-msg').html(resp[1]);
