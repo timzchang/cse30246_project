@@ -149,9 +149,9 @@ function searchEvent() {
 
                 attn = [];
             } else {
-            console.log("not array");
-            console.log(attn);
-            return;
+                console.log("not array");
+                console.log(attn);
+                return;
             }
         }
         console.log('hello');

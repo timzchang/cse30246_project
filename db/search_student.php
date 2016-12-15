@@ -2,10 +2,9 @@
 # get information from get command
 $netid = $_GET["netid"];
 # case: netid is empty
-if (!$date) {
+if (!$netid) {
     return;
 }
-echo $date;
 # link to dsg
 $link = mysqli_connect('localhost','csyers','trombone') or die('could not connect: ' . mysql_error());
 
@@ -13,11 +12,11 @@ $link = mysqli_connect('localhost','csyers','trombone') or die('could not connec
 mysqli_select_db($link,'databse') or die('could not select databse');
 
 # check if there is a student in the db with that student's nnetid
-$test = "select * from events where date = \"$date\";";
-$test_result = mysqli_query($link,$test) or die('test failed: ' . mysql_error());
+$sql = "select * from students where netid = \"$netid\";";
+$result = mysqli_query($link,$sql) or die('test failed: ' . mysql_error());
 
 # return error if no students are in the list
-if (!$test_result || mysqli_num_rows($test_result) == 0) {
+if (!$result || mysqli_num_rows($result) == 0) {
     echo "none";
     return;
 }
@@ -25,8 +24,8 @@ if (!$test_result || mysqli_num_rows($test_result) == 0) {
 $response = array();
 
 # populate the response array with the rows from the query
-if ($test_result && mysqli_num_rows($result) > 0) {
-    while ($row = $test_result->fetch_array()) {
+if ($result && mysqli_num_rows($result) > 0) {
+    while ($row = $result->fetch_array()) {
         $response[] = $row;
     }
 }
