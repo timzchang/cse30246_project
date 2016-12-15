@@ -1,6 +1,6 @@
 <?php
-# get information from GET command
-$netid = $_GET["netid"];
+# get information from get command
+$netid = $_get["netid"];
 
 # case: netid is empty
 if (!$netid) {
@@ -8,14 +8,14 @@ if (!$netid) {
 }
 
 # link to dsg
-$link = mysqli_connect('localhost','csyers','trombone') or die('Could not connect: ' . mysql_error());
+$link = mysqli_connect('localhost','csyers','trombone') or die('could not connect: ' . mysql_error());
 
 # connect to databse
-mysqli_select_db($link,'databse') or die('Could not select databse');
+mysqli_select_db($link,'databse') or die('could not select databse');
 
-# check if there is a student in the DB with that student's nnetid
-$test = "SELECT * FROM students WHERE netid = \"$netid\";";
-$test_result = mysqli_query($link,$test) or die('Test failed: ' . mysql_error());
+# check if there is a student in the db with that student's nnetid
+$test = "select * from students where netid = \"$netid\";";
+$test_result = mysqli_query($link,$test) or die('test failed: ' . mysql_error());
 
 # return error if no students are in the list
 if (!$test_result || mysqli_num_rows($test_result) == 0) {
@@ -23,11 +23,11 @@ if (!$test_result || mysqli_num_rows($test_result) == 0) {
     return;
 }
 
-# SQL query to get all issues for this student
-$sql = "SELECT * FROM attendance_issues a, events e WHERE a.eventid=e.eventid and a.netid LIKE \"%$netid%\";";
+# sql query to get all issues for this student
+$sql = "select * from attendance_issues a, events e where a.eventid=e.eventid and a.netid like \"%$netid%\";";
 
 # get the result of the query
-$result = mysqli_query($link,$sql) or die('Query failed: ' . mysql_error());
+$result = mysqli_query($link,$sql) or die('query failed: ' . mysql_error());
 $response = array();
 
 # if no issues exist:
@@ -44,7 +44,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 }
 
 
-header('Content-Type: application/json');
+header('content-type: application/json');
 echo json_encode($response);
 
 ?>

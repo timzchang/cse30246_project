@@ -129,7 +129,7 @@ function searchStudent () {
 }
 
 function searchEvent() {
-    var date = $("#form-date").val();
+    var date = $("#date").val();
     $.get({
         // url: "../db/view_search.php",
         url: "../db/search_event.php",
@@ -139,8 +139,8 @@ function searchEvent() {
     }).done(function(attn, status){
         if (!Array.isArray(attn)) {
             if (attn == "none") {
-                console.log("invalid netid");
-                $('#event-error .msg').html('Invalid netid!');
+                console.log("no events on date");
+                $('#event-error .msg').html('No event on this date.');
                 $('#event-error').slideDown();
                 $('#event-good').slideUp();
                 attn = [];
