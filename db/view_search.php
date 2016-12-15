@@ -1,6 +1,6 @@
 <?php
 # get information from get command
-$netid = $_get["netid"];
+$netid = $_GET["netid"];
 
 # case: netid is empty
 if (!$netid) {
