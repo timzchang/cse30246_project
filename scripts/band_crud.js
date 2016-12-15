@@ -224,7 +224,6 @@ $(function () {
                 yog: $("#year").val(),
                 school: $("#school").val()
                 // event_type: event_type,
-                // old_eventid: $('#event-id').data('eventid')
             }).done(function(resp) {
                 console.log(resp);
                 if(Array.isArray(resp)) {
