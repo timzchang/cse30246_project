@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Attendance Issue View</title>
+		<meta charset="utf-8">
+
+		<!-- JQuery -->
+		<script src="http://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+		<!-- Bootstrap Date-Picker Plugin -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css"/>
+
+		<!-- JS -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js" integrity="sha256-IxYUmOOk74FUrcx5FEMOHVmTJDb7ZAwnC/ivo/OQGxg=" crossorigin="anonymous"></script>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<link rel="stylesheet" type="text/css" href="../css/theme.css">
+		<link rel="stylesheet" type="text/css" href="../css/index.css">
+        <link rel="stylesheet" type="text/css" href="../css/view.css">
+
+		<meta name="viewport", content="width=device-width, initial-scale=1">
+	</head>
+
+
+<body>
+
+<!-- ======= Nav Bar ====== -->
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle " data-toggle="collapse" data-target="#myNav">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../index.html"><span class="glyphicon glyphicon-home"></span></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNav">
+                <ul class="nav navbar-nav">
+                    <li><a href="attn.html">REQUESTS</a></li>
+                    <li><a href="calendar.html">CALENDAR</a></li>
+                    <li><a href="#">SEARCH</a></li>
+                    <li><a href="stats.html">STATISTICS</a></li>
+                    <li><a href="block.html">WARMUP BLOCK</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a class="navbar-brand" href="settings.html"><span class="glyphicon glyphicon-cog"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- ======= Nav Bar ====== -->
+
+<!-- ======= Header ====== -->
+<section id="head" class="dark">
+    <div class="container text-left">
+        <h1><b>Edit Students/Events</b></h1>
+        <h3>View, edit or delete students by netid and events by date</h3>
+    </div>
+</section>
+<!-- ======= Header ====== -->
+
+<!-- ======= Student Form ====== -->
+<section id="form">
+    <div class="container text-left">
+        <form role="form" id="student">
+        	<div class="form-group">
+                <label for="netid">netid:</label>
+                <input type="text" class="form-control" id="netid" placeholder="e.g. kdye">
+        	</div>
+            <div class="alert alert-danger container col-lg-12" id="student-error">
+                <button id="student-closebtn" type="button" class="close" data-dismiss="modal">&times;</button>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="msg" id="msg"></span>
+            </div>
+            <div class="alert alert-success container col-lg-12" id="student-good">
+                <button id="student-success-closebtn" type="button" class="close" data-dismiss="modal">&times;</button>
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                <span class="msg" id="msg"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+    	</form>
+    </div>
+    
+</section>
+<!-- ======= Student Form ====== -->
+
+<!-- ======= Student Table ====== -->
+<section id="table">
+<div class="container text-left">
+<div id="resp_table">
+<table id="student-table" class="table table-hover table-bordered ">
+    <thead>
+      <tr>
+        <th>netid</th>
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th>Section</th>
+	    <th>Year</th>
+	    <th>School</th>
+        <th>Block</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- ======= Student Table ====== -->
+
+<!-- ======= Event Form ====== -->
+<section id="event">
+    <div class="container text-center">
+        <h1>Create Event</h1>
+    </div>
+    <div class="container text-left">
+        <form role="form" id="search-event">
+          <div class="form-group"> <!-- Date input -->
+            <label class="control-label" for="date">Date:</label>
+            <div class='input-group date datepicker' id='datetimepicker1'>
+                <input class="form-control " id="date" name="date" placeholder="YYYY-MM-DD" type="text"required>
+                <span class="input-group-addon ">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+          </div>
+            <div class="alert alert-danger container col-lg-12" id="event-error">
+                <button id="event-closebtn" type="button" class="close" data-dismiss="modal">&times;</button>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="msg" id="msg"></span>
+            </div>
+            <div class="alert alert-success container col-lg-12" id="event-good">
+                <button id="event-success-closebtn" type="button" class="close" data-dismiss="modal">&times;</button>
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                <span class="msg" id="msg"></span>
+            </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function(){
+      $('.datepicker').datepicker({format: 'yyyy-mm-dd'});
+    })
+</script>
+<!-- ======= Event Form ====== -->
+
+
+<!-- ======= Event Table ====== -->
+<section>
+<div class="container text-left">
+<div id="event-_table">
+<table id="event-table" class="table table-hover table-bordered ">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Event Type</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- ======= Event Table ====== -->
+
+<!-- ======= Student Modal ====== -->
+<div id="edit-student-modal" class="modal fade" role="dialog" tabindex=-1>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="edit-student-form" class="form-horizontal">
+                    <fieldset>
+                    <legend>Update Student</legend>
+                    <div class="form-group">
+                      <label for="netid" class="col-lg-2 control-label">netid</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="netid" id="form-netid" placeholder="kdye" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="fname" class="col-lg-2 control-label">First Name</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="fname" id="fname" placeholder="Kenneth" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="lname" class="col-lg-2 control-label">Last Name</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="lname" id="lname" placeholder="kdye" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="section">Section:</label>
+                        <select class="form-control" id="section">
+                            <option>01 - Piccolo</option>
+                            <option>02 - Clarinet</option>
+                            <option>03 - Saxophone</option>
+                            <option>04 - Trumpet</option>
+                            <option>05 - Falto</option>
+                            <option>06 - Trombone</option>
+                            <option>07 - Baritone</option>
+                            <option>08 - Bass</option>
+                            <option>09 - Drumline</option>
+                            <option>10 - Manager</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="year">Year:</label>
+                        <select class="form-control" id="year">
+                            <option>Freshman</option>
+                            <option>Sophmore</option>
+                            <option>Junior</option>
+                            <option>Senior</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="school">School:</label>
+                        <select class="form-control" id="school">
+                            <option>ND</option>
+                            <option>HCC</option>
+                            <option>SMC</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="block">Block Number:</label>
+                        <select class="form-control" id="block">
+                            <option>N1</option>
+                            <option>N2</option>
+                            <option>N3</option>
+                            <option>S1</option>
+                            <option>S2</option>
+                            <option>S3</option>
+                            <option>E1</option>
+                            <option>E2</option>
+                            <option>E3</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-10 col-lg-offset-2">
+                        <span class="text-danger edit-msg"></span>
+                        <button type="reset" id="edit-student-cancel" class="btn btn-default" >cancel</button>
+                        <button id="edit-student-submit" type="submit" class="btn btn-primary" >submit</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ======= Student Modal ====== -->
+
+<!-- ======= Del Student Modal ====== -->
+<div id="del-student-modal" class="modal fade" role="dialog" tabindex=-1>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete Issue</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete? This cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                 <div class="col-lg-10 col-lg-offset-2">
+                     <button type="reset" class="btn btn-default" data-dismiss="modal">cancel</button>
+                     <button id="del-student-submit" type="submit" class="btn btn-primary" data-dismiss="modal">submit</button>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ======= Del Student Modal ====== -->
+
+
+<!-- ======= Event Modal ====== -->
+<div id="edit-event-modal" class="modal fade" role="dialog" tabindex=-1>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="edit-event-form" class="form-horizontal">
+                    <fieldset>
+                    <legend>Update Event</legend>
+                    <div class="form-group"> <!-- Date input -->
+                        <label class="col-lg-2 control-label" for="date">Date</label>
+                        <div class="col-lg-10">
+                            <div class='input-group date datepicker' id='datetimepicker1'>
+                                <input class="form-control " id="form-date" name="form-date" placeholder="MM/DD/YYY" type="text" required>
+                                <span class="input-group-addon ">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="event-type" class="col-lg-2 control-label">Event Type</label>
+                      <div class="col-lg-10">
+                        <select disabled class="form-control" id="event-type">
+                            <option>Practice</option>
+                            <option>Marchout</option>
+                            <option>Game</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-10 col-lg-offset-2">
+                        <span class="text-danger edit-msg"></span>
+                        <span id="event-id"></span>
+                        <br>
+                        <button type="reset" id="edit-event-cancel" class="btn btn-default" >cancel</button>
+                        <button id="edit-event-submit" type="submit" class="btn btn-primary" >submit</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+      $('.datepicker').datepicker({ format: 'yyyy-mm-dd' });
+    })
+</script>
+<!-- ======= Event Modal ====== -->
+
+<!-- ======= Del Event Modal ====== -->
+<div id="del-event-modal" class="modal fade" role="dialog" tabindex=-1>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete Issue</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete? This cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                 <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default" data-dismiss="modal">cancel</button>
+                    <button id="del-event-submit" type="submit" class="btn btn-primary" data-dismiss="modal">submit</button>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ======= Del Event Modal ====== -->
+
+<script src="../scripts/band_crud.js"></script>
+</body>

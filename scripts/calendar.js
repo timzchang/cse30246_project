@@ -1,6 +1,6 @@
 function searchDate (date) {
     $.get({
-        url: "../db/get_events_on_date.php",
+        url: "../db/get_issues_on_date.php",
         data: {
             date: date
         }
