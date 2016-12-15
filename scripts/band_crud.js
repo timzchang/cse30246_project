@@ -43,7 +43,7 @@ $("#event-success-closebtn").on('click', function (event) {
 //         data: {
 //             date: d
 //         }
-//     }).done(function(type, status){
+//     }).dmne(function(type, status){
 //         console.log(type);
 //         $('#event-type').val(type);
 //     });
