@@ -265,13 +265,12 @@ $(function () {
             $.post('../db/delete_student.php', {
                 netid: mem.netid
             }).done(function(resp) {
-                searchStudent();
                 if(Array.isArray(resp)) {
                     if(resp[0] != "0") {
                         alert(resp[1]);
                     } else {
                         $('#student-good .msg').html('Delete success');
-                        $('#student-good .msg').slideDown();
+                        $('#student-good').slideDown();
                         $("#student-table tbody").html('');
                     }
                 }
@@ -336,13 +335,12 @@ $(function () {
             $.post('../db/delete_event.php', {
                 eventid: mem.eventid
             }).done(function(resp) {
-                searchEvent();
                 if(Array.isArray(resp)) {
                     if(resp[0] != "0") {
                         alert(resp[1]);
                     } else {
                         $('#event-good .msg').html('Delete success');
-                        $('#event-good .msg').slideDown();
+                        $('#event-good').slideDown();
                         $("#event-table tbody").html('');
                     }
                 }
