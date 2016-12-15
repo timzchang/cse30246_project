@@ -43,7 +43,7 @@ $("#event-success-closebtn").on('click', function (event) {
 //         data: {
 //             date: d
 //         }
-//     }).done(function(type, status){
+//     }).dmne(function(type, status){
 //         console.log(type);
 //         $('#event-type').val(type);
 //     });
@@ -129,7 +129,7 @@ function searchStudent () {
 }
 
 function searchEvent() {
-    var date = $("#form-date").val();
+    var date = $("#date").val();
     $.get({
         // url: "../db/view_search.php",
         url: "../db/search_event.php",
