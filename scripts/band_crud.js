@@ -228,6 +228,7 @@ $(function () {
                 console.log(resp);
                 if(Array.isArray(resp)) {
                     if(resp[0] == "0") {
+			console.log("HERE");
                         $('#edit-student-modal').modal('hide');
                         $('#edit-student-modal').modal('hide');
                         $('#netid').val($('#form-netid').val());

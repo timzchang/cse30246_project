@@ -25,6 +25,8 @@ $link = mysqli_connect('localhost','csyers','trombone') or die('Could not connec
 # connect to the databse
 mysqli_select_db($link,'databse') or die('Could not select databse');
 
+$section = substr($section,5);
+
 # SQL query to get the event requested
 $sql = "UPDATE students SET fname = \"$fname\", lname = \"$lname\", section = \"$section\", block = \"$block\", yog = $yog, school = \"$school\" WHERE netid = \"$netid\";";
 
