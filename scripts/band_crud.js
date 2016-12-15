@@ -64,6 +64,8 @@ function searchStudent () {
                 $('#student-error .msg').html('Invalid netid!');
                 $('#student-error').slideDown();
                 $('#student-good').slideUp();
+$("#student-table tbody").html('');
+
                 attn = [];
             } else {
             console.log("not array");
@@ -144,6 +146,8 @@ function searchEvent() {
                 $('#event-error .msg').html('No event on this date.');
                 $('#event-error').slideDown();
                 $('#event-good').slideUp();
+$("#event-table tbody").html('');
+
                 attn = [];
             } else {
             console.log("not array");
@@ -151,6 +155,7 @@ function searchEvent() {
             return;
             }
         }
+        console.log('hello');
         console.log(attn[0].date);
         $('#event-error').slideUp();
         if (attn.length != 0) {
