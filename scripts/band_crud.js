@@ -140,8 +140,8 @@ function searchEvent() {
     }).done(function(attn, status){
         if (!Array.isArray(attn)) {
             if (attn == "none") {
-                console.log("invalid netid");
-                $('#event-error .msg').html('Invalid netid!');
+                console.log("no events on date");
+                $('#event-error .msg').html('No event on this date.');
                 $('#event-error').slideDown();
                 $('#event-good').slideUp();
                 attn = [];
