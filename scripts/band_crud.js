@@ -146,7 +146,6 @@ function searchEvent() {
                 $('#event-error .msg').html('No event on this date.');
                 $('#event-error').slideDown();
                 $('#event-good').slideUp();
-$("#event-table tbody").html('');
 
                 attn = [];
             } else {
@@ -270,6 +269,10 @@ $(function () {
                 if(Array.isArray(resp)) {
                     if(resp[0] != "0") {
                         alert(resp[1]);
+                    } else {
+                        $('#student-good .msg').html('Delete success');
+                        $('#student-good .msg').slideDown();
+                        $("#student-table tbody").html('');
                     }
                 }
                 console.log(resp);
@@ -337,6 +340,10 @@ $(function () {
                 if(Array.isArray(resp)) {
                     if(resp[0] != "0") {
                         alert(resp[1]);
+                    } else {
+                        $('#event-good .msg').html('Delete success');
+                        $('#event-good .msg').slideDown();
+                        $("#event-table tbody").html('');
                     }
                 }
                 console.log(resp);
