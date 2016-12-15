@@ -47,7 +47,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="attn.html">REQUESTS</a></li>
                     <li><a href="calendar.html">CALENDAR</a></li>
-                    <li><a href="#">SEARCH</a></li>
+                    <li><a href="view.html">SEARCH</a></li>
                     <li><a href="stats.html">STATISTICS</a></li>
                     <li><a href="block.html">WARMUP BLOCK</a></li>
                 </ul>
@@ -71,11 +71,14 @@
 
 <!-- ======= Student Form ====== -->
 <section id="form">
+    <div class="container text-center">
+        <h1>Search Student</h1>
+    </div>
     <div class="container text-left">
         <form role="form" id="student">
         	<div class="form-group">
                 <label for="netid">netid:</label>
-                <input type="text" class="form-control" id="netid" placeholder="e.g. kdye">
+                <input type="text" class="form-control" id="netid" placeholder="e.g. kdye" required>
         	</div>
             <div class="alert alert-danger container col-lg-12" id="student-error">
                 <button id="student-closebtn" type="button" class="close" data-dismiss="modal">&times;</button>
@@ -122,7 +125,7 @@
 <!-- ======= Event Form ====== -->
 <section id="event">
     <div class="container text-center">
-        <h1>Create Event</h1>
+        <h1>Search Event</h1>
     </div>
     <div class="container text-left">
         <form role="form" id="search-event">
@@ -145,7 +148,7 @@
                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 <span class="msg" id="msg"></span>
             </div>
-          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="submit" class="btn btn-default">Search</button>
         </form>
     </div>
 </section>
@@ -189,7 +192,7 @@
                     <div class="form-group">
                       <label for="netid" class="col-lg-2 control-label">netid</label>
                       <div class="col-lg-10">
-                        <input type="text" class="form-control" name="netid" id="form-netid" placeholder="kdye" required>
+                        <input type="text" class="form-control" name="netid" id="form-netid" placeholder="kdye"  disabled>
                       </div>
                     </div>
                     <div class="form-group">
@@ -311,7 +314,7 @@
                     <div class="form-group">
                       <label for="event-type" class="col-lg-2 control-label">Event Type</label>
                       <div class="col-lg-10">
-                        <select disabled class="form-control" id="event-type">
+                        <select class="form-control" id="event-type">
                             <option>Practice</option>
                             <option>Marchout</option>
                             <option>Game</option>

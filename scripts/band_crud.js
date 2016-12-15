@@ -43,7 +43,7 @@ $("#event-success-closebtn").on('click', function (event) {
 //         data: {
 //             date: d
 //         }
-//     }).done(function(type, status){
+//     }).dmne(function(type, status){
 //         console.log(type);
 //         $('#event-type').val(type);
 //     });
@@ -64,13 +64,16 @@ function searchStudent () {
                 $('#student-error .msg').html('Invalid netid!');
                 $('#student-error').slideDown();
                 $('#student-good').slideUp();
+$("#student-table tbody").html('');
+
                 attn = [];
-            };
+            } else {
             console.log("not array");
             console.log(attn);
             return;
+            }
     	}
-        console.log(attn[0].date);
+        console.log(attn[0].netid);
         $('#student-error').slideUp();
         if (attn.length != 0) {
             $('#student-good').slideUp();
@@ -129,7 +132,7 @@ function searchStudent () {
 }
 
 function searchEvent() {
-    var date = $("#form-date").val();
+    var date = $("#date").val();
     $.get({
         // url: "../db/view_search.php",
         url: "../db/search_event.php",
@@ -139,16 +142,18 @@ function searchEvent() {
     }).done(function(attn, status){
         if (!Array.isArray(attn)) {
             if (attn == "none") {
-                console.log("invalid netid");
-                $('#event-error .msg').html('Invalid netid!');
+                console.log("no events on date");
+                $('#event-error .msg').html('No event on this date.');
                 $('#event-error').slideDown();
                 $('#event-good').slideUp();
                 attn = [];
-            };
-            console.log("not array");
-            console.log(attn);
-            return;
+            } else {
+                console.log("not array");
+                console.log(attn);
+                return;
+            }
         }
+        console.log('hello');
         console.log(attn[0].date);
         $('#event-error').slideUp();
         if (attn.length != 0) {
@@ -219,13 +224,14 @@ $(function () {
                 yog: $("#year").val(),
                 school: $("#school").val()
                 // event_type: event_type,
-                // old_eventid: $('#event-id').data('eventid')
             }).done(function(resp) {
                 console.log(resp);
                 if(Array.isArray(resp)) {
                     if(resp[0] == "0") {
+			console.log("HERE");
                         $('#edit-student-modal').modal('hide');
                         $('#edit-student-modal').modal('hide');
+                        $('#netid').val($('#form-netid').val());
                         searchStudent();
                     } else {
                         $('.edit-msg').html(resp[1]);
@@ -259,10 +265,13 @@ $(function () {
             $.post('../db/delete_student.php', {
                 netid: mem.netid
             }).done(function(resp) {
-                searchStudent();
                 if(Array.isArray(resp)) {
                     if(resp[0] != "0") {
                         alert(resp[1]);
+                    } else {
+                        $('#student-good .msg').html(resp[1]);
+                        $('#student-good').slideDown();
+                        $("#student-table tbody").html('');
                     }
                 }
                 console.log(resp);
@@ -293,6 +302,7 @@ $(function () {
                     if(resp[0] == "0") {
                         $('#edit-event-modal').modal('hide');
                         $('#edit-event-modal').modal('hide');
+                        $('#date').val($('#form-date').val());
                         searchEvent();
                     } else {
                         $('.edit-msg').html(resp[1]);
@@ -326,10 +336,13 @@ $(function () {
             $.post('../db/delete_event.php', {
                 eventid: mem.eventid
             }).done(function(resp) {
-                searchEvent();
                 if(Array.isArray(resp)) {
                     if(resp[0] != "0") {
                         alert(resp[1]);
+                    } else {
+                        $('#event-good .msg').html(resp[1]);
+                        $('#event-good').slideDown();
+                        $("#event-table tbody").html('');
                     }
                 }
                 console.log(resp);
