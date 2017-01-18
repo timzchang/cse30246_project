@@ -16,12 +16,10 @@ $sql = "select * from students where netid = \"$netid\";";
 $result = mysqli_query($link,$sql) or die('test failed: ' . mysql_error());
 
 # return error if no students are in the list
-echo "!!!!!!!!!!!!!!!!!!!!!!";
 if (!$result || mysqli_num_rows($result) == 0) {
     echo "none";
     return;
 }
-echo "??????????????????????";
 $response = array();
 
 # populate the response array with the rows from the query
