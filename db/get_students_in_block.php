@@ -12,7 +12,7 @@ mysqli_select_db($link,'databse') or die('Could not select databse');
 
 # get the list of students in the block from the students table
 
-$sql = "SELECT B.netid, lname, fname, ifnull(excused,'N') as excused
+$sql = "SELECT B.netid, lname, fname, ifnull(excused,'1') as excused
 FROM (select * from students where students.block = '$block') B
 LEFT JOIN (
   SELECT date, netid, excused

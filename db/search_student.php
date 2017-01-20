@@ -20,7 +20,6 @@ if (!$result || mysqli_num_rows($result) == 0) {
     echo "none";
     return;
 }
-
 $response = array();
 
 # populate the response array with the rows from the query

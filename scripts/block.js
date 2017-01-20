@@ -25,7 +25,6 @@ function formatDateForReq (date) {
 }
 
 function submitForm(d) {
-console.log($('#block_id').val());
     $.get({
         url: "../db/get_students_in_block.php",
         data: {
@@ -33,21 +32,27 @@ console.log($('#block_id').val());
             block: $('#block_id').val()
         }
     }).done(function(attn, status){
-        console.log(attn);
         var $table = $('table tbody').html('');
         for(var i=0; i<attn.length; i++) {
            var c = "";
-           (attn[i].excused == 'Y') ?  c = "text-muted" : c="active";
+           if (attn[i].excused == 'Y') {
+               c = "text-muted"; 
+           } else if (attn[i].excused == 'N') {
+               c = "info"; 
+           }else { 
+               c="active";
+           }
+           console.log(attn[0].excused);
             
             $row = $('<tr class="' + c +'" id="row-' + i + '">'+
                 '<td>' + attn[i].lname + ', ' + attn[i].fname + '</td>');
             $row.data(attn[i]);
             $table.append($row);
             $row.on('click', function(event) {
+                console.log("before click: " +  $(this).attr("class"));
                 var $target = $(event.delegateTarget);
                 var mem = $target.data()
-                if (mem.excused == "N") {
-                console.log($(this).attr("class"));
+                if (mem.excused != "Y") {
                     if($(this).attr("class") == 'active'){
                        $(this).removeClass('active');
                        $(this).addClass('info');
@@ -66,6 +71,7 @@ console.log($('#block_id').val());
                        netid: mem.netid,
                        date: d
                     }).done(function(resp) {
+                       console.log("deleted");
                     }).fail(function(resp) {
                        console.log(resp);
                     });
