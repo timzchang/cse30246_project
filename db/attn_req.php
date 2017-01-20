@@ -38,6 +38,20 @@ if($result->num_rows != 0){
         return;
     }
 
+    $sql = "SELECT count(*) FROM students WHERE netid = \"$netid\";";
+
+    $result = mysqli_query($link,$sql);
+    if($result){
+        $row = $result->fetch_row();
+        if($row[0] == 0) {
+            echo "4";
+            return;
+        }
+    } else {
+        echo "1";
+        return;
+    }
+
     $sql = "INSERT INTO attendance_issues VALUES (\"$netid\",$eventid,\"$absence_type\",\"$excused\");";
 
     $result = mysqli_query($link,$sql);

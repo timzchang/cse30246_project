@@ -45,7 +45,9 @@ function submitForm () {
         } else if (data == "2") {
             $('.alert-danger .msg').html("Error - no event on selected date.");
         } else if (data == "3") {
-            $('.alert-danger .msg').html("Error - attendance issue already exists for this studnet on this date.");
+            $('.alert-danger .msg').html("Error - attendance issue already exists for this student on this date.");
+        } else if (data == "4") {
+            $('.alert-danger .msg').html("Error - invalid netid.");
         }
             
         $('.alert-success .msg').html("Created new attendance issue.");
